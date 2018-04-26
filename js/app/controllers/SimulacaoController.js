@@ -11,6 +11,9 @@ class SimulacaoController {
                 this._inputPssRetido = $('#pssRetido');   
                 this._inputBaseDeCalculo = $('#baseDeCalculo');    
                 this._inputNovaBaseDeCalculo = $('#novaBaseDeCalculo');
+
+                this._inputIrDevido = $('#irDevido');
+                this._inputIrCobrado = $('#irCobrado');
         }
 
 
@@ -23,6 +26,10 @@ class SimulacaoController {
             this._inputPssRetido.value = this._simulacao.pssRetido;
             this._inputBaseDeCalculo.value = this._simulacao.baseDeCalculo;
             this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo;
+            
+            this._inputIrDevido.value = this._simulacao.irDevido;
+            this._inputIrCobrado.value = this._simulacao.irCobrado;
+
         }
 
         _criarSimulacao() {
