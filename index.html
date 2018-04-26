@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Simulador de Cálculos RRA</title>
+</head>
+<body>
+    
+    <form onsubmit="simulacaoController.executarSimulacao(event)">
+        <table>
+            <thead>
+                <tr><th colspan="2">SIMULAÇÃO DE CÁLCULOS RRA </th></tr>            
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Ano recebimento:</td>
+                    <td><input type="text" name="anoRecebimento" id="anoRecebimento" required></td>
+                </tr>
+                <tr>
+                    <td>Valor recebido:</td>
+                    <td><input type="number" name="valorRecebido" id="valorRecebido" min="0.01" step="0.01" value="0.0" required></td>
+                </tr>   
+                <tr>
+                    <td>PSS retido:</td>
+                    <td><input type="text" name="pssRetido" id="pssRetido" disabled="true"></td>
+                </tr>       
+                <tr>
+                    <td>Base de cálculo(IR - cobrado):</td>
+                    <td><input type="text" name="baseDeCalculo" id="baseDeCalculo" disabled="true"></td>
+                </tr>       
+                <tr>
+                    <td>IR(cobrado):</td>
+                    <td><input type="text" name="irCobrado" id="irCobrado" disabled="true"></td>
+                </tr>       
+                <tr>
+                    <td>Número de meses:</td>
+                    <td><input type="text" name="numeroDeMeses" id="numeroDeMeses" required></td>
+                </tr>       
+                <tr>
+                    <td>Nova base de cálculo (IR - RRA):</td>
+                    <td><input type="text" name="novaBaseDeCalculo" id="novaBaseDeCalculo" value="6793.68" disabled="true"></td>
+                </tr> 
+                <tr>
+                    <td>IR Devido (RRA):</td>
+                    <td><input type="text" name="irDevido" id="irDevido" disabled="true"></td>
+                </tr>      
+                <tr>
+                    <td>IR a restituir</td>
+                    <td><input type="text" name="irARestituir" id="irARestituir" disabled="true"></td>
+                </tr>
+
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td>IR a restituir (atualizado):</td>
+                    <td><input type="text" name="irARestituirAtualizado" id="irARestituirAtualizado" disabled="true"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit">Simular</button></td>
+                </tr>            
+            </tfoot>
+        </table>
+    </form>    
+    <script type="text/javascript" src="js/app/models/Simulacao.js"></script>
+    <script type="text/javascript" src="js/app/controllers/SimulacaoController.js"></script>
+    <script>
+
+        let simulacaoController = new SimulacaoController();
+    </script>
+</body>
+</html>
