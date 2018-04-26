@@ -157,23 +157,19 @@ class Simulacao {
         switch(true) {
 
             case(this.valorRecebido < (this.primeiroTeto * this.numeroDeMeses)):
-                alert('1');
                 break;
 
             case((this.primeiroTeto * this.numeroDeMeses) < this.valorRecebido && this.valorRecebido <= (this.segundoTeto * this.numeroDeMeses)):
-                alert('2');
                 irDevido = (this.baseDeCalculo * this.aliquotaSegundoPisoSegundoTeto) - (this.valorADeduzirSegundoPisoSegundoTeto * this.numeroDeMeses);
                 irCobrado = (this.baseDeCalculo * this.aliquotaSegundoPisoSegundoTeto) - this.valorADeduzirSegundoPisoSegundoTeto;
                 break;
 
             case((this.segundoTeto * this.numeroDeMeses) < this.valorRecebido && this.valorRecebido <= (this.terceiroTeto * this.numeroDeMeses)):
-                alert('3');
                 irDevido = (this.baseDeCalculo * this.aliquotaTerceiroPisoTerceiroTeto) - (this.valorADeduzirTerceiroPisoTerceiroTeto * this.numeroDeMeses);
                 irCobrado = (this.baseDeCalculo * this.aliquotaTerceiroPisoTerceiroTeto) - this.valorADeduzirTerceiroPisoTerceiroTeto;
                 break;
 
             case((this.terceiroTeto * this.numeroDeMeses) < this.valorRecebido && this.valorRecebido <= (this.quartoTeto * this.numeroDeMeses)):
-                alert('4');
                 irDevido = (this.baseDeCalculo * this.aliquotaQuartoPisoQuartoTeto) - (this.valorADeduzirQuartoPisoQuartoTeto * this.numeroDeMeses);
                 irCobrado = (this.baseDeCalculo * this.aliquotaQuartoPisoQuartoTeto) - this.valorADeduzirQuartoPisoQuartoTeto;
                 break;
