@@ -1,3 +1,6 @@
+/**
+ * Classe auxiliar de formatação numérica.
+ */
 class NumeroHelper {
 
 

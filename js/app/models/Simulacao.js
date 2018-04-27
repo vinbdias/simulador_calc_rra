@@ -1,7 +1,19 @@
+/**
+ * Classe responsável pelos dados e regras de negócio de uma simulação.
+ */
 class Simulacao {
 
+    /**
+     * Método construtor
+     * @param int anoRecebimento => ano de recebimento.
+     * @param float valorRecebido => valor recebido.
+     * @param numeroDeMeses => número de meses.
+     */
 	constructor(anoRecebimento, valorRecebido, numeroDeMeses) {
 
+        /**
+         * Define os atributos da simulação a partir dos 3 parâmetros informados: anoRecebimento, valorRecebido e numeroDeMeses.
+         */
 		this._anoRecebimento = anoRecebimento;
 		this._valorRecebido = valorRecebido;
 		this._numeroDeMeses = numeroDeMeses;
@@ -30,6 +42,10 @@ class Simulacao {
 		Object.freeze(this);
 	}
 
+
+    /**
+     * Método que define o datasource, a fonte de dados, com a qual a simulação vai trabalhar para definir e calcular seus valores.
+     */
     _setDataSource() {
 
         this._dataSource = {
@@ -116,19 +132,31 @@ class Simulacao {
         };
     }    
 
+    /**
+     * Método que define, na simulação instanciada, a base de cálculo, o atributo baseDeCalculo.
+     */
     _setBaseDeCalculo() {
 
         this._pssRetido = this._valorRecebido * 0.11;
         this._baseDeCalculo = this._valorRecebido - this._pssRetido;
     }
 
+    /**
+     * Método que define, na simulação instanciada, a taxa selic, o atributo taxaSelic.
+     */
     _setTaxaSelic() {
 
        this._taxaSelic = this._dataSource[this._anoRecebimento].taxaSelic;
     }
 
+    /**
+     * Método que define as alíquotas, a partir do datasource, a serem utilizadas em cálculos da simulação.
+     */
     _setAliquotas() {
 
+        /**
+         * Até para o ano 2009, temos um domínio de alíquotas. Após 2009, outro.
+         */
         if(this._anoRecebimento < 2009) {
 
             this._aliquotaSegundoPisoSegundoTeto = this._dataSource.aliquotas.ate2009.aliquotaSegundoPisoSegundoTeto;
@@ -143,11 +171,17 @@ class Simulacao {
         }
     }   
 
+    /**
+     * Método que define os tetos, a partir do datasource, a serem utilizados em cálculos da simulação.
+     */
     _setTetos() {
 
         this._primeiroTeto = this._dataSource[this._anoRecebimento].primeiroTeto;
         this._segundoTeto = this._dataSource[this._anoRecebimento].segundoTeto;        
 
+        /**
+         * Do ano de 2009 para frente, há mais duas faixas, mais dois tetos.
+         */
         if(this._anoRecebimento >= 2009) {
 
             this._quartoTeto = this._dataSource[this._anoRecebimento].quartoTeto;
@@ -155,11 +189,17 @@ class Simulacao {
         }        
     } 
 
+    /**
+     * Método que define os valores a deduzir, a partir do datasource, de cada faixa.
+     */
     _setValoresADeduzir () {
 
         this._valorADeduzirSegundoPisoSegundoTeto = this._dataSource[this._anoRecebimento].valorADeduzirSegundoPisoSegundoTeto;        
         this._valorADeduzirTerceiroPisoTerceiroTeto = this._dataSource[this._anoRecebimento].valorADeduzirTerceiroPisoTerceiroTeto;
 
+        /**
+         * De 2009 para frente, há mais duas faixas, mais dois valores a deduzir.
+         */
         if(this._anoRecebimento >= 2009) {
 
             this._valorADeduzirQuartoPisoQuartoTeto = this._dataSource[this._anoRecebimento].valorADeduzirQuartoPisoQuartoTeto;
@@ -167,8 +207,14 @@ class Simulacao {
         }
     }
 
+    /**
+     * Método que calcula o IR cobrado e devido.
+     */
     _setIrCobradoDevido() {
 
+        /**
+         * Até 2009 é um cálculo. A partir de 2009, outro.
+         */
         if(this._anoRecebimento < 2009) {
 
             this._calculoAte2009();
@@ -179,21 +225,33 @@ class Simulacao {
         }      
     }
 
+    /**
+     * Método que define a nova base de cálculo da simulação.
+     */
     _setNovaBaseDeCalculo() {
 
         this._novaBaseDeCalculo = this._baseDeCalculo / this._numeroDeMeses;
     }
 
+    /**
+     * Método que define o IR a ser restituido.
+     */
     _setIrARestituir() {
 
         this._irARestituir = this._irCobrado - this._irDevido;
     }
 
+    /**
+     * Método que define o IR a reduzir atualizado.
+     */
     _setIrARestituirAtualizado() {
 
         this._irARestituirAtualizado = this._taxaSelic * (2 * this._irARestituir);
     }
 
+    /**
+     * Getters. Métodos pelos quais acessaremos no controlador, os atributos de uma simulação.
+     */
     get anoRecebimento() {
 
         return this._anoRecebimento;
@@ -305,6 +363,9 @@ class Simulacao {
         return this._irARestituirAtualizado;
     }
 
+    /**
+     * Método que executa os cálculos de IR cobrado e devido de uma simulação até o ano de 2009.
+     */
 	_calculoAte2009()  {
 
 		let irDevido = 0.00;
@@ -352,6 +413,9 @@ class Simulacao {
         console.log((this.quartoTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido);
     }
 
+    /**
+     * Método que executa os cálculos de IR cobrado e devido de uma simulação a partir de 2009.
+     */
     _calculoAPartirDe2009() {
 
         let irDevido = 0.00;
