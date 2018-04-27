@@ -52,28 +52,6 @@ class Simulacao {
 		return this._dataSource[this._anoRecebimento].primeiroTeto;
 	}
 
-	get irCobradoDevido() {
-
-		if(this._anoRecebimento < 2009) {
-
-			return this._calculoAte2009();
-		}
-		else {
-
-			return this._calculoAPartirDe2009();
-		}
-	}
-
-	get irDevido() {
-
-		return this.irCobradoDevido['irDevido'];
-	}
-
-	get irCobrado() {
-
-		return this.irCobradoDevido['irCobrado'];
-	}
-
 	get primeiroTeto() {
 
 		return this._dataSource[this.anoRecebimento].primeiroTeto;
@@ -119,12 +97,35 @@ class Simulacao {
         return this.anoRecebimento < 2009 ? this._dataSource.aliquotas.ate2009.aliquotaQuintoPisoQuintoTeto : this._dataSource.aliquotas.aPartirDe2009.aliquotaQuintoPisoQuintoTeto;
     }
 
+    get irCobradoDevido() {
+
+        if(this._anoRecebimento < 2009) {
+
+            return this._calculoAte2009();
+        }
+        else {
+
+            return this._calculoAPartirDe2009();
+        }
+    }
+
+    get irDevido() {
+
+        return this.irCobradoDevido['irDevido'];
+    }
+
+    get irCobrado() {
+
+        return this.irCobradoDevido['irCobrado'];
+    }
+
 	_calculoAte2009()  {
 
 		let irDevido = 0.00;
 		let irCobrado = 0.00;
 
-		switch(true) {
+
+		switch(this.valorRecebido) {
 
 			case(this.valorRecebido < (this.primeiroTeto * this.numeroDeMeses)):
 				break;
@@ -154,7 +155,22 @@ class Simulacao {
         let irDevido = 0.00;
         let irCobrado = 0.00;
 
-        switch(true) {
+        console.log(this.valorRecebido);
+        console.log(this.valorRecebido + '<' + (this.primeiroTeto * this.numeroDeMeses));
+
+        console.log((this.primeiroTeto * this.numeroDeMeses) + '<' + this.valorRecebido);
+        console.log(this.valorRecebido + '<=' + (this.segundoTeto * this.numeroDeMeses));
+
+        console.log((this.segundoTeto * this.numeroDeMeses) + '<' + this.valorRecebido);
+        console.log(this.valorRecebido + '<=' + (this.terceiroTeto * this.numeroDeMeses));
+
+        console.log((this.terceiroTeto * this.numeroDeMeses) + '<' + this.valorRecebido);
+        console.log(this.valorRecebido + '<=' + (this.quartoTeto * this.numeroDeMeses));
+
+        console.log((this.quartoTeto * this.numeroDeMeses) + '<' + this.valorRecebido);
+
+
+        switch(this.valorRecebido) {
 
             case(this.valorRecebido < (this.primeiroTeto * this.numeroDeMeses)):
                 break;
