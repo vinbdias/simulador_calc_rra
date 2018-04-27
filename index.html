@@ -1,68 +1,154 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Simulador de Cálculos RRA</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="http://www.iconarchive.com/download/i99341/dtafalonso/android-lollipop/Calculator.ico" />
+    <title>Simulador de Cálculos RRA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
+
 </head>
 <body>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-12" style="margin:30px 0 40px 0;text-align:center"><h2>SIMULAÇÃO DE CÁLCULOS RRA </h2></div>
 
-    <form onsubmit="simulacaoController.executarSimulacao(event)">
-        <table>
-            <thead>
-                <tr><th colspan="2">SIMULAÇÃO DE CÁLCULOS RRA </th></tr>
-            </thead>
+            <div class="col-md-5" style="margin-bottom:60px;">
 
-            <tbody>
-                <tr>
-                    <td>Ano recebimento:</td>
-                    <td><input type="text" name="anoRecebimento" id="anoRecebimento" required></td>
-                </tr>
-                <tr>
-                    <td>Valor recebido:</td>
-                    <td><input type="number" name="valorRecebido" id="valorRecebido" min="0.01" step="0.01" value="0.0" required></td>
-                </tr>
-                <tr>
-                    <td>PSS retido:</td>
-                    <td><input type="text" name="pssRetido" id="pssRetido" disabled="true"></td>
-                </tr>
-                <tr>
-                    <td>Base de cálculo(IR - cobrado):</td>
-                    <td><input type="text" name="baseDeCalculo" id="baseDeCalculo" disabled="true"></td>
-                </tr>
-                <tr>
-                    <td>IR(cobrado):</td>
-                    <td><input type="text" name="irCobrado" id="irCobrado" disabled="true"></td>
-                </tr>
-                <tr>
-                    <td>Número de meses:</td>
-                    <td><input type="text" name="numeroDeMeses" id="numeroDeMeses" required></td>
-                </tr>
-                <tr>
-                    <td>Nova base de cálculo (IR - RRA):</td>
-                    <td><input type="number" name="novaBaseDeCalculo" id="novaBaseDeCalculo" value="0.00" disabled="true"></td>
-                </tr>
-                <tr>
-                    <td>IR Devido (RRA):</td>
-                    <td><input type="text" name="irDevido" id="irDevido" disabled="true"></td>
-                </tr>
-                <tr>
-                    <td>IR a restituir</td>
-                    <td><input type="text" name="irARestituir" id="irARestituir" disabled="true"></td>
-                </tr>
+                <form onsubmit="simulacaoController.executarSimulacoes(event)">
 
-            </tbody>
+                    <div class="form-group row">
+                        <label for="anoRecebimento" class="col-sm-8 col-form-label">Ano recebimento:</label>
+                        <select name="anoRecebimento" id="anoRecebimento" class="col-sm-4 form-control text-right" required>
+                            <option value="2005">2005</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>                            
+                        </select>                        
+                    </div>
 
-            <tfoot>
-                <tr>
-                    <td>IR a restituir (atualizado):</td>
-                    <td><input type="text" name="irARestituirAtualizado" id="irARestituirAtualizado" disabled="true"></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><button type="submit">Simular</button></td>
-                </tr>
-            </tfoot>
-        </table>
-    </form>
+                    <div class="form-group row">
+                        <label for="valorRecebido" class="col-sm-8 col-form-label">Valor recebido:</label>
+                        <input onkeyup="simulacaoController.formataValorRecebido(event)" class="col-sm-4 form-control text-right" name="valorRecebido" id="valorRecebido" required />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="pssRetido" class="col-sm-8 col-form-label">PSS retido:</label>
+                        <input type="text" class="col-sm-4 form-control text-right" name="pssRetido" id="pssRetido" disabled="true" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="baseDeCalculo" class="col-sm-8 col-form-label">Base de cálculo(IR - cobrado):</label>
+                        <input type="text" class="col-sm-4 form-control text-right" name="baseDeCalculo" id="baseDeCalculo" disabled="true" />
+                    </div>
+
+                    <div class="form-group row" style="background-color:#e9ecef;font-size:18px!important;font-weight:bold">
+                        <label for="irCobrado" class="col-sm-8 col-form-label">IR(cobrado)</label>
+                        <input type="text" class="col-sm-4 form-control text-right" name="irCobrado" id="irCobrado" disabled="true" style="font-size:18px!important;font-weight:bold!important;" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="numeroDeMeses" class="col-sm-8 col-form-label">Número de meses:</label>
+                        <input type="text" class="col-sm-4 form-control text-right" name="numeroDeMeses" id="numeroDeMeses" required />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="novaBaseDeCalculo" class="col-sm-8 col-form-label">Nova base de cálculo (IR - RRA):</label>
+                        <input type="text" class="col-sm-4 form-control text-right" name="novaBaseDeCalculo" id="novaBaseDeCalculo" disabled="true" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="irDevido" class="col-sm-8 col-form-label">IR Devido (RRA):</label>
+                        <input type="text" class="col-sm-4 form-control text-right" name="irDevido" id="irDevido" disabled="true" />
+                    </div>
+
+                    <div class="form-group row" style="background-color:#e9ecef;font-size:18px!important;font-weight:bold">
+                        <label for="irARestituir" class="col-sm-8 col-form-label">IR a Restituir:</label>
+                        <input type="text" class="col-sm-4 form-control text-right" name="irARestituir" id="irARestituir" disabled="true" />
+                    </div>
+
+
+                    <div class="form-group row" style="background-color:#e9ecef;font-size:18px!important;font-weight:bold">
+                        <label for="irARestituirAtualizado" class="col-sm-8 col-form-label">IR a restituir (atualizado):</label>
+                        <input type="text" class="col-sm-4 form-control text-right" name="irARestituirAtualizado" id="irARestituirAtualizado" disabled="true" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Simular</button>
+                </form>
+            </div>
+
+            <div class="col-md-7" style="margin-bottom:60px;">
+                <table width="100%" border="0" cellspacing="5" cellpadding="5" class="table text-center table-striped table-bordered">
+                    <thead class="thead-dark ">
+                        <tr>
+                            <th scope="col">Ano</th>
+                            <th scope="col">IR - RRA devido</th>
+                            <th scope="col">IR - Cobrado</th>
+                            <th scope="col">Taxa Selic</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2005</td>
+                            <td><label class="col-sm-8 col-form-label" id="RRADevido2005"></label></td>
+                            <td><label class="col-sm-8 col-form-label" id="RRACobrado2005"></label></td>
+                            <td>127,45%</td>
+                        </tr>
+                        <tr>
+                            <td>2006</td>
+                            <td><label class="col-sm-8 col-form-label" id="RRADevido2006"></label></td>
+                            <td><label class="col-sm-8 col-form-label" id="RRACobrado2006"></label></td>
+                            <td>114,32%</td>
+                        </tr>
+                        <tr>
+                            <td>2007</td>
+                            <td><label class="col-sm-8 col-form-label" id="RRADevido2007"></label></td>
+                            <td><label class="col-sm-8 col-form-label" id="RRACobrado2007"></label></td>
+                            <td>103,50%</td>
+                        </tr>
+                        <tr>
+                            <td>2008</td>
+                            <td><label class="col-sm-8 col-form-label" id="RRADevido2008"></label></td>
+                            <td><label class="col-sm-8 col-form-label" id="RRACobrado2008"></label></td>
+                            <td>91,37%</td>
+                        </tr>
+                        <tr>
+                            <td>2009</td>
+                            <td><label class="col-sm-8 col-form-label" id="RRADevido2009"></label></td>
+                            <td><label class="col-sm-8 col-form-label" id="RRACobrado2009"></label></td>
+                            <td>82,74%</td>
+                        </tr>
+                        <tr>
+                            <td>2010</td>
+                            <td><label class="col-sm-8 col-form-label" id="RRADevido2010"></label></td>
+                            <td><label class="col-sm-8 col-form-label" id="RRACobrado2010"></label></td>
+                            <td>72,76%</td>
+                        </tr>
+                        <tr>
+                            <td>2011</td>
+                            <td><label class="col-sm-8 col-form-label" id="RRADevido2011"></label></td>
+                            <td><label class="col-sm-8 col-form-label" id="RRACobrado2011"></label></td>
+                            <td>61,88%</td>
+                        </tr>
+                        <tr bgcolor="#212529">
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/app/helpers/NumeroHelper.js"></script>
     <script type="text/javascript" src="js/app/models/Simulacao.js"></script>
     <script type="text/javascript" src="js/app/controllers/SimulacaoController.js"></script>
     <script>
