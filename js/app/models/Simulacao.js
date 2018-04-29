@@ -20,15 +20,15 @@ class Simulacao {
 
 		this._setDataSource();
 
-        this._setAliquotas(); 
+        this._setAliquotas();
 
-        this._setTetos();       
+        this._setTetos();
 
         this._setValoresADeduzir();
 
-        this._setBaseDeCalculo();      
+        this._setBaseDeCalculo();
 
-        this._setTaxaSelic();  
+        this._setTaxaSelic();
 
         this._setIrCobradoDevido();
 
@@ -55,7 +55,7 @@ class Simulacao {
                     aliquotaTerceiroPisoTerceiroTeto: '0.275' //27,5%
                 },
                 aPartirDe2009: {
-                    aliquotaSegundoPisoSegundoTeto: '0.07', //7%
+                    aliquotaSegundoPisoSegundoTeto: '0.075', //7%
                     aliquotaTerceiroPisoTerceiroTeto: '0.15', //15%
                     aliquotaQuartoPisoQuartoTeto: '0.225', //22,5%
                     aliquotaQuintoPiso: '0.275' //27,5%
@@ -130,7 +130,7 @@ class Simulacao {
                 valorADeduzirQuintoPiso: '723.95'
             }
         };
-    }    
+    }
 
     /**
      * Método que define, na simulação instanciada, a base de cálculo, o atributo baseDeCalculo.
@@ -160,16 +160,16 @@ class Simulacao {
         if(this._anoRecebimento < 2009) {
 
             this._aliquotaSegundoPisoSegundoTeto = this._dataSource.aliquotas.ate2009.aliquotaSegundoPisoSegundoTeto;
-            this._aliquotaTerceiroPisoTerceiroTeto = this._dataSource.aliquotas.ate2009.aliquotaTerceiroPisoTerceiroTeto;                
+            this._aliquotaTerceiroPisoTerceiroTeto = this._dataSource.aliquotas.ate2009.aliquotaTerceiroPisoTerceiroTeto;
         }
         else {
 
             this._aliquotaSegundoPisoSegundoTeto = this._dataSource.aliquotas.aPartirDe2009.aliquotaSegundoPisoSegundoTeto;
             this._aliquotaTerceiroPisoTerceiroTeto = this._dataSource.aliquotas.aPartirDe2009.aliquotaTerceiroPisoTerceiroTeto;
             this._aliquotaQuartoPisoQuartoTeto = this._dataSource.aliquotas.aPartirDe2009.aliquotaQuartoPisoQuartoTeto;
-            this._aliquotaQuintoPiso = this._dataSource.aliquotas.aPartirDe2009.aliquotaQuintoPiso;             
+            this._aliquotaQuintoPiso = this._dataSource.aliquotas.aPartirDe2009.aliquotaQuintoPiso;
         }
-    }   
+    }
 
     /**
      * Método que define os tetos, a partir do datasource, a serem utilizados em cálculos da simulação.
@@ -177,7 +177,7 @@ class Simulacao {
     _setTetos() {
 
         this._primeiroTeto = this._dataSource[this._anoRecebimento].primeiroTeto;
-        this._segundoTeto = this._dataSource[this._anoRecebimento].segundoTeto;        
+        this._segundoTeto = this._dataSource[this._anoRecebimento].segundoTeto;
 
         /**
          * Do ano de 2009 para frente, há mais duas faixas, mais dois tetos.
@@ -186,15 +186,15 @@ class Simulacao {
 
             this._quartoTeto = this._dataSource[this._anoRecebimento].quartoTeto;
             this._terceiroTeto = this._dataSource[this._anoRecebimento].terceiroTeto;
-        }        
-    } 
+        }
+    }
 
     /**
      * Método que define os valores a deduzir, a partir do datasource, de cada faixa.
      */
     _setValoresADeduzir () {
 
-        this._valorADeduzirSegundoPisoSegundoTeto = this._dataSource[this._anoRecebimento].valorADeduzirSegundoPisoSegundoTeto;        
+        this._valorADeduzirSegundoPisoSegundoTeto = this._dataSource[this._anoRecebimento].valorADeduzirSegundoPisoSegundoTeto;
         this._valorADeduzirTerceiroPisoTerceiroTeto = this._dataSource[this._anoRecebimento].valorADeduzirTerceiroPisoTerceiroTeto;
 
         /**
@@ -222,7 +222,7 @@ class Simulacao {
         else {
 
             this._calculoAPartirDe2009();
-        }      
+        }
     }
 
     /**
@@ -246,7 +246,7 @@ class Simulacao {
      */
     _setIrARestituirAtualizado() {
 
-        this._irARestituirAtualizado = this._taxaSelic * (2 * this._irARestituir);
+        this._irARestituirAtualizado = this._irARestituir + (this._irARestituir * this._taxaSelic);
     }
 
     /**
@@ -265,7 +265,7 @@ class Simulacao {
     get numeroDeMeses() {
 
         return this._numeroDeMeses;
-    }    
+    }
 
     get primeiroTeto() {
 
@@ -280,12 +280,12 @@ class Simulacao {
     get terceiroTeto() {
 
         return this._terceiroTeto;
-    }  
+    }
 
     get quartoTeto() {
 
         return this._quartoTeto;
-    }          
+    }
 
 	get pssRetido() {
 
@@ -351,7 +351,7 @@ class Simulacao {
     get novaBaseDeCalculo() {
 
         return this._novaBaseDeCalculo;
-    }    
+    }
 
     get irARestituir() {
 
@@ -370,17 +370,16 @@ class Simulacao {
 
 		let irDevido = 0.00;
 		let irCobrado = 0.00;
-                
 
-        if((this._primeiroTeto * this._numeroDeMeses) < this._valorRecebido && this._valorRecebido <= (this._segundoTeto * this._numeroDeMeses)) {
-            
+        if((this._primeiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._segundoTeto * this._numeroDeMeses)) {
+
             irDevido = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - (this._valorADeduzirSegundoPisoSegundoTeto * this._numeroDeMeses);
-            irCobrado = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - this._valorADeduzirSegundoPisoSegundoTeto;            
+            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - (this.valorADeduzirTerceiroPisoTerceiroTeto);
         }
-        else if((this._segundoTeto * this._numeroDeMeses) < this._valorRecebido) {
-            
+        else if((this._segundoTeto * this._numeroDeMeses) < this._baseDeCalculo) {
+
             irDevido = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - (this._valorADeduzirTerceiroPisoTerceiroTeto * this._numeroDeMeses);
-            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;                        
+            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;
         }
 
         this._irDevido = irDevido;
@@ -393,9 +392,9 @@ class Simulacao {
 
         console.log(this._valorRecebido + ' < ' + (this._primeiroTeto * this._numeroDeMeses));
 
-        console.log((this._primeiroTeto * this._numeroDeMeses) + ' < ' + this._valorRecebido + ' || ' + this._valorRecebido + ' <= ' + (this._segundoTeto * this._numeroDeMeses));        
+        console.log((this._primeiroTeto * this._numeroDeMeses) + ' < ' + this._valorRecebido + ' && ' + this._valorRecebido + ' <= ' + (this._segundoTeto * this._numeroDeMeses));
 
-        console.log((this._segundoTeto * this._numeroDeMeses) + ' < ' + this._valorRecebido);         
+        console.log((this._segundoTeto * this._numeroDeMeses) + ' < ' + this._valorRecebido);
     }
 
     _depuraCalculoAPartirDe2009() {
@@ -404,11 +403,11 @@ class Simulacao {
 
         console.log(this.valorRecebido + ' < ' + (this.primeiroTeto * this.numeroDeMeses));
 
-        console.log((this.primeiroTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido + ' && ' + this.valorRecebido + ' <= ' + (this.segundoTeto * this.numeroDeMeses));        
+        console.log((this.primeiroTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido + ' && ' + this.valorRecebido + ' <= ' + (this.segundoTeto * this.numeroDeMeses));
 
-        console.log((this.segundoTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido + ' && ' + this.valorRecebido + ' <= ' + (this.terceiroTeto * this.numeroDeMeses));        
+        console.log((this.segundoTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido + ' && ' + this.valorRecebido + ' <= ' + (this.terceiroTeto * this.numeroDeMeses));
 
-        console.log((this.terceiroTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido + ' && ' + this.valorRecebido + ' <= ' + (this.quartoTeto * this.numeroDeMeses));        
+        console.log((this.terceiroTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido + ' && ' + this.valorRecebido + ' <= ' + (this.quartoTeto * this.numeroDeMeses));
 
         console.log((this.quartoTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido);
     }
@@ -422,25 +421,25 @@ class Simulacao {
         let irCobrado = 0.00;
 
 
-        if((this._primeiroTeto * this._numeroDeMeses) < this._valorRecebido && this._valorRecebido <= (this._segundoTeto * this._numeroDeMeses)) {
-            
+        if((this._primeiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._segundoTeto * this._numeroDeMeses)) {
+s
             irDevido = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - (this._valorADeduzirSegundoPisoSegundoTeto * this._numeroDeMeses);
-            irCobrado = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - this._valorADeduzirSegundoPisoSegundoTeto;            
+            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;
         }
-        else if((this._segundoTeto * this._numeroDeMeses) < this._valorRecebido && this._valorRecebido <= (this._terceiroTeto * this._numeroDeMeses)) {
+        else if((this._segundoTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._terceiroTeto * this._numeroDeMeses)) {
 
             irDevido = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - (this._valorADeduzirTerceiroPisoTerceiroTeto * this._numeroDeMeses);
-            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;            
+            irCobrado =(this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;
         }
-        else if((this._terceiroTeto * this._numeroDeMeses) < this._valorRecebido && this._valorRecebido <= (this._quartoTeto * this._numeroDeMeses)) {
-            
+        else if((this._terceiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._quartoTeto * this._numeroDeMeses)) {
+
             irDevido = (this._baseDeCalculo * this._aliquotaQuartoPisoQuartoTeto) - (this._valorADeduzirQuartoPisoQuartoTeto * this._numeroDeMeses);
-            irCobrado = (this._baseDeCalculo * this._aliquotaQuartoPisoQuartoTeto) - _this.valorADeduzirQuartoPisoQuartoTeto;        
+            irCobrado = (this._baseDeCalculo * this._aliquotaQuartoPisoQuartoTeto) - this._valorADeduzirQuartoPisoQuartoTeto;
         }
-        else if((this._quartoTeto * this._numeroDeMeses) < this._valorRecebido) {
-            
+        else if((this._quartoTeto * this._numeroDeMeses) < this._baseDeCalculo) {
+
             irDevido = (this._baseDeCalculo * this._aliquotaQuintoPiso) - (this._valorADeduzirQuintoPiso * this._numeroDeMeses);
-            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;            
+            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;
         }
 
         this._irDevido = irDevido;

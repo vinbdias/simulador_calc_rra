@@ -26,18 +26,18 @@ class SimulacaoController {
                 this._inputIrCobrado = $('#irCobrado');
 
                 this._inputNovaBaseDeCalculo = $('#novaBaseDeCalculo');
-                
+
                 this._inputIrARestituir = $('#irARestituir');
                 this._inputIrARestituirAtualizado = $('#irARestituirAtualizado');
         }
 
         /**
-         * Método que formata o valor do campo '#valorRecebido', mediante um evento da página.         
+         * Método que formata o valor do campo '#valorRecebido', mediante um evento da página.
          */
         formataValorRecebido() {
 
             this._inputValorRecebido.value = NumeroHelper.formataMoeda(this._inputValorRecebido.value);
-        }        
+        }
 
 
         /**
@@ -55,7 +55,7 @@ class SimulacaoController {
              * Chama os métodos de exeução das simulações do ano informado e dos outros.
              */
             this._executarSimulacaoAnoInformado();
-            this._executarSimulacaoDe2005A2011();
+            //this._executarSimulacaoDe2005A2011();
 
         }
 
@@ -67,7 +67,7 @@ class SimulacaoController {
             /**
              * Cria uma simulação a partir do ano informado no input '#anoRecebimento', já obtendo todos os dados a serem exibidos nos campos vazios da tela.
              */
-            this._simulacao = this._criarSimulacao(this._inputAnoRecebimento.value);
+            this._simulacao = this._criarSimulacao(parseInt(this._inputAnoRecebimento.value));
 
             /**
              * Imprime os dados nos respectivos inputs, formatando como valor moeda BRL (R$).
@@ -77,7 +77,7 @@ class SimulacaoController {
             this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
 
             this._inputIrDevido.value = this._simulacao.irDevido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
-            this._inputIrCobrado.value = this._simulacao.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});  
+            this._inputIrCobrado.value = this._simulacao.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
 
             this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
             this._inputIrARestituir.value = this._simulacao.irARestituir.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
@@ -126,9 +126,9 @@ class SimulacaoController {
                     this._simulacaoLoop = this._criarSimulacao(i);
 
                     $('#RRADevido' + i).innerHTML = this._simulacaoLoop.irDevido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
-                    $('#RRACobrado' + i).innerHTML = this._simulacaoLoop.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});                    
-                }                
-            }            
+                    $('#RRACobrado' + i).innerHTML = this._simulacaoLoop.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+                }
+            }
         }
 
         /**
@@ -138,8 +138,8 @@ class SimulacaoController {
         _criarSimulacao(anoInformado) {
 
             let valorRecebido = this._inputValorRecebido.value.replace('.', '').replace(',', '.');
-            
+
             return new Simulacao(anoInformado, valorRecebido, this._inputNumeroDeMeses.value);
-        }        
+        }
 
 }
