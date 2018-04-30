@@ -4,96 +4,88 @@
 		"selected_items":
 		[
 			[
-				"uc",
-				"ucwords_improved"
+				"negoc",
+				"negociacoes"
 			],
 			[
-				"to",
-				"toLocaleString"
+				"Negociaca",
+				"Negociacao"
 			],
 			[
-				"ir",
-				"irDevido"
+				"nego",
+				"negociacoes"
 			],
 			[
-				"_inputIr",
-				"_inputIrARestituirAtualizado"
-			],
-			[
-				"_ira",
-				"_irARestituirAtualizado"
-			],
-			[
-				"irAR",
-				"irARestituirAtualizado\t(index.html)"
-			],
-			[
-				"form",
-				"formataMoeda\t(index.html)"
-			],
-			[
-				"_input",
-				"_inputValorRecebido"
-			],
-			[
-				"valor",
-				"valorRecebido"
-			],
-			[
-				"numero",
-				"numeroHelper"
-			],
-			[
-				"onk",
-				"onkeyup\tAttr"
+				"Neg",
+				"Negociacao\t(NegociacaoService.js)"
 			],
 			[
 				"op",
-				"option\tTag"
+				"openRequest"
 			],
 			[
-				"_ir",
-				"_irCobrado"
+				"negoci",
+				"negociacao"
 			],
 			[
-				"type",
-				"typeof〔keyword〕"
+				"ne",
+				"negociacao"
 			],
 			[
-				"_set",
-				"_setBasesDeCalculo"
+				"Negoc",
+				"NegociacaoService"
 			],
 			[
-				"irC",
-				"irCobradoDevido\t(Simulacao.js)"
+				"in",
+				"inverteOrdem\t(ListaNegociacoes.js)"
 			],
 			[
-				"_negoc",
-				"_negociacoesView"
+				"v",
+				"volume"
 			],
 			[
-				"adic",
-				"adicionada\t(NegociacaoController.js)"
+				"negociacao",
+				"negociacaoController\t(index.html)"
 			],
 			[
-				"_mensag",
+				"ob",
+				"obterNegociacoes\t(NegociacaoService.js)"
+			],
+			[
+				"array",
+				"arrayAchatado"
+			],
+			[
+				"Negociacao",
+				"NegociacaoService\t(NegociacaoService.js)"
+			],
+			[
+				"ope",
+				"open(method, url)"
+			],
+			[
+				"Ne",
+				"Negociacao"
+			],
+			[
+				"Mens",
+				"Mensagem.js\t(index.html)"
+			],
+			[
+				"_mensa",
 				"_mensagemView"
 			],
 			[
-				"tex",
-				"texto"
+				"Proxy",
+				"ProxyFactory"
 			],
 			[
-				"_n",
-				"_negociacoesView"
+				"Prox",
+				"ProxyFactory\t(ProxyFactory.js)"
 			],
 			[
 				"Error",
 				"Error(message)"
-			],
-			[
-				"_mensa",
-				"_mensagem"
 			],
 			[
 				"M",
@@ -110,10 +102,6 @@
 			[
 				"get",
 				"getTime"
-			],
-			[
-				"Negoc",
-				"Negociacao\t(Negociacao.js)"
 			],
 			[
 				"va",
@@ -140,68 +128,39 @@
 	"buffers":
 	[
 		{
-			"contents": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\" />\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n    <link rel=\"shortcut icon\" href=\"http://www.iconarchive.com/download/i99341/dtafalonso/android-lollipop/Calculator.ico\" />\n    <title>Simulador de Cálculos RRA</title>\n    <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css\" />\n\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center\">\n            <div class=\"col-md-12\" style=\"margin:30px 0 40px 0;text-align:center\"><h2>SIMULAÇÃO DE CÁLCULOS RRA </h2></div>\n\n            <div class=\"col-md-5\" style=\"margin-bottom:60px;\">\n\n                <form onsubmit=\"simulacaoController.executarSimulacoes(event)\">\n\n                    <div class=\"form-group row\">\n                        <label for=\"anoRecebimento\" class=\"col-sm-8 col-form-label\">Ano recebimento:</label>\n                        <select name=\"anoRecebimento\" id=\"anoRecebimento\" class=\"col-sm-4 form-control text-right\" required>\n                            <option value=\"2005\">2005</option>\n                            <option value=\"2006\">2006</option>\n                            <option value=\"2007\">2007</option>\n                            <option value=\"2008\">2008</option>\n                            <option value=\"2009\">2009</option>\n                            <option value=\"2010\">2010</option>\n                            <option value=\"2011\">2011</option>                            \n                        </select>                        \n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"valorRecebido\" class=\"col-sm-8 col-form-label\">Valor recebido:</label>\n                        <input onkeyup=\"simulacaoController.formataValorRecebido(event)\" class=\"col-sm-4 form-control text-right\" name=\"valorRecebido\" id=\"valorRecebido\" required />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"pssRetido\" class=\"col-sm-8 col-form-label\">PSS retido:</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"pssRetido\" id=\"pssRetido\" disabled=\"true\" />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"baseDeCalculo\" class=\"col-sm-8 col-form-label\">Base de cálculo(IR - cobrado):</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"baseDeCalculo\" id=\"baseDeCalculo\" disabled=\"true\" />\n                    </div>\n\n                    <div class=\"form-group row\" style=\"background-color:#e9ecef;font-size:18px!important;font-weight:bold\">\n                        <label for=\"irCobrado\" class=\"col-sm-8 col-form-label\">IR(cobrado)</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"irCobrado\" id=\"irCobrado\" disabled=\"true\" style=\"font-size:18px!important;font-weight:bold!important;\" />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"numeroDeMeses\" class=\"col-sm-8 col-form-label\">Número de meses:</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"numeroDeMeses\" id=\"numeroDeMeses\" required />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"novaBaseDeCalculo\" class=\"col-sm-8 col-form-label\">Nova base de cálculo (IR - RRA):</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"novaBaseDeCalculo\" id=\"novaBaseDeCalculo\" disabled=\"true\" />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"irDevido\" class=\"col-sm-8 col-form-label\">IR Devido (RRA):</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"irDevido\" id=\"irDevido\" disabled=\"true\" />\n                    </div>\n\n                    <div class=\"form-group row\" style=\"background-color:#e9ecef;font-size:18px!important;font-weight:bold\">\n                        <label for=\"irARestituir\" class=\"col-sm-8 col-form-label\">IR a Restituir:</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"irARestituir\" id=\"irARestituir\" disabled=\"true\" />\n                    </div>\n\n\n                    <div class=\"form-group row\" style=\"background-color:#e9ecef;font-size:18px!important;font-weight:bold\">\n                        <label for=\"irARestituirAtualizado\" class=\"col-sm-8 col-form-label\">IR a restituir (atualizado):</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"irARestituirAtualizado\" id=\"irARestituirAtualizado\" disabled=\"true\" />\n                    </div>\n\n                    <button type=\"submit\" class=\"btn btn-primary\">Simular</button>\n                </form>\n            </div>\n\n            <div class=\"col-md-7\" style=\"margin-bottom:60px;\">\n                <table width=\"100%\" border=\"0\" cellspacing=\"5\" cellpadding=\"5\" class=\"table text-center table-striped table-bordered\">\n                    <thead class=\"thead-dark \">\n                        <tr>\n                            <th scope=\"col\">Ano</th>\n                            <th scope=\"col\">IR - RRA devido</th>\n                            <th scope=\"col\">IR - Cobrado</th>\n                            <th scope=\"col\">Taxa Selic</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr>\n                            <td>2005</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2005\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2005\"></label></td>\n                            <td>127,45%</td>\n                        </tr>\n                        <tr>\n                            <td>2006</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2006\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2006\"></label></td>\n                            <td>114,32%</td>\n                        </tr>\n                        <tr>\n                            <td>2007</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2007\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2007\"></label></td>\n                            <td>103,50%</td>\n                        </tr>\n                        <tr>\n                            <td>2008</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2008\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2008\"></label></td>\n                            <td>91,37%</td>\n                        </tr>\n                        <tr>\n                            <td>2009</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2009\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2009\"></label></td>\n                            <td>82,74%</td>\n                        </tr>\n                        <tr>\n                            <td>2010</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2010\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2010\"></label></td>\n                            <td>72,76%</td>\n                        </tr>\n                        <tr>\n                            <td>2011</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2011\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2011\"></label></td>\n                            <td>61,88%</td>\n                        </tr>\n                        <tr bgcolor=\"#212529\">\n                            <td>&nbsp;</td>\n                            <td>&nbsp;</td>\n                            <td>&nbsp;</td>\n                            <td>&nbsp;</td>\n                        </tr>\n                    </tbody>\n                </table>\n\n\n            </div>\n        </div>\n    </div>\n    <script type=\"text/javascript\" src=\"js/app/helpers/NumeroHelper.js\"></script>\n    <script type=\"text/javascript\" src=\"js/app/models/Simulacao.js\"></script>\n    <script type=\"text/javascript\" src=\"js/app/controllers/SimulacaoController.js\"></script>\n    <script>\n\n        let simulacaoController = new SimulacaoController();\n    </script>\n</body>\n</html>",
-			"file": "index.html",
-			"file_size": 9148,
-			"file_write_time": 131693199087076723,
+			"file": "/C/alura/js_avancado_III/aluraframe/client/js/app/services/NegociacaoService.js",
 			"settings":
 			{
-				"buffer_size": 8980,
-				"encoding": "UTF-8 with BOM",
-				"line_ending": "Windows"
+				"buffer_size": 2593,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "/**\n * Classe do controlador da simulação. Responsável por \"amarrar\" todas as interações da tela.\n */\nclass SimulacaoController {\n\n        /**\n         * Método construtor\n         */\n        constructor() {\n                /**\n                 * Cria um apelido para seletor do DOM. Como o $ do jQuery.\n                 */\n                let $ = document.querySelector.bind(document);\n\n                /**\n                 * Captura os inputs da tela para futuros controles.\n                 */\n                this._inputAnoRecebimento = $('#anoRecebimento');\n                this._inputValorRecebido = $('#valorRecebido');\n                this._inputNumeroDeMeses = $('#numeroDeMeses');\n\n                this._inputPssRetido = $('#pssRetido');\n                this._inputBaseDeCalculo = $('#baseDeCalculo');\n\n                this._inputIrDevido = $('#irDevido');\n                this._inputIrCobrado = $('#irCobrado');\n\n                this._inputNovaBaseDeCalculo = $('#novaBaseDeCalculo');\n                \n                this._inputIrARestituir = $('#irARestituir');\n                this._inputIrARestituirAtualizado = $('#irARestituirAtualizado');\n        }\n\n        /**\n         * Método que formata o valor do campo '#valorRecebido', mediante um evento da página.         \n         */\n        formataValorRecebido() {\n\n            this._inputValorRecebido.value = NumeroHelper.formataMoeda(this._inputValorRecebido.value);\n        }        \n\n\n        /**\n         * Método que executa as simulações da página.\n         * @param Event event => evento que acionou a execução das simulações.\n         */\n        executarSimulacoes(event) {\n\n            /**\n             * Evita a execução padrão do evento para que se tenha total controle da execução.\n             */\n            event.preventDefault();\n\n            /**\n             * Chama os métodos de exeução das simulações do ano informado e dos outros.\n             */\n            this._executarSimulacaoAnoInformado();\n            this._executarSimulacaoDe2005A2011();\n\n        }\n\n        /**\n         * Método que executa a simulação do ano informado na tela.\n         */\n        _executarSimulacaoAnoInformado() {\n\n            /**\n             * Cria uma simulação a partir do ano informado no input '#anoRecebimento', já obtendo todos os dados a serem exibidos nos campos vazios da tela.\n             */\n            this._simulacao = this._criarSimulacao(this._inputAnoRecebimento.value);\n\n            /**\n             * Imprime os dados nos respectivos inputs, formatando como valor moeda BRL (R$).\n             */\n            this._inputPssRetido.value = this._simulacao.pssRetido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputBaseDeCalculo.value = this._simulacao.baseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n\n            this._inputIrDevido.value = this._simulacao.irDevido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputIrCobrado.value = this._simulacao.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});  \n\n            this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputIrARestituir.value = this._simulacao.irARestituir.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputIrARestituirAtualizado.value = this._simulacao.irARestituirAtualizado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n\n        }\n\n        /**\n         * Método que executa as simulações restantes, de 2005 a 2009, pulando a do ano informado, pois esta já foi executada pelo método _executarSimulacaoAnoInformado.\n         */\n        _executarSimulacaoDe2005A2011() {\n\n            /**\n             * Cria um apelido para seletor do DOM. Como o $ do jQuery.\n             */\n            let $ = document.querySelector.bind(document);\n\n            /**\n             * Inicializa o loop para os anos restantes.\n             */\n            for(let i = 2005; i <= 2011; i++) {\n\n                /**\n                 * Inicializa a simulação do loop vazia.\n                 */\n                this._simulacaoLoop = null;\n\n                /**\n                 * Verifica se a iteração do laço se refere à simulação já criada.\n                 */\n                if(i == this._inputAnoRecebimento.value) {\n\n                    /**\n                     * Imprime os valores na tabela a partir da simulação já criada.\n                     */\n                    $('#RRADevido' + i).innerHTML = this._simulacao.irDevido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n                    $('#RRACobrado' + i).innerHTML = this._simulacao.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n\n                    continue;\n                }\n                else {\n\n                    /**\n                     * Cria a simulação a partir da iteração do laço, correspondente a um dos anos (2005 a 2009).\n                     */\n                    this._simulacaoLoop = this._criarSimulacao(i);\n\n                    $('#RRADevido' + i).innerHTML = this._simulacaoLoop.irDevido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n                    $('#RRACobrado' + i).innerHTML = this._simulacaoLoop.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});                    \n                }                \n            }            \n        }\n\n        /**\n         * Cria simulação a partir de um ano informado.\n         * @param int anoInformado => ano informado. Necessário para parametrização da simulação no modelo.\n         */\n        _criarSimulacao(anoInformado) {\n\n            let valorRecebido = this._inputValorRecebido.value.replace('.', '').replace(',', '.');\n            \n            return new Simulacao(anoInformado, valorRecebido, this._inputNumeroDeMeses.value);\n        }        \n\n}\n",
-			"file": "js/app/controllers/SimulacaoController.js",
-			"file_size": 6337,
-			"file_write_time": 131693219702044218,
+			"file": "/C/alura/js_avancado_III/aluraframe/client/js/app/controllers/NegociacaoController.js",
 			"settings":
 			{
-				"buffer_size": 6131,
+				"buffer_size": 1828,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/alura/js_avancado_III/aluraframe/client/aprendendo_indexeddb.html",
+			"settings":
+			{
+				"buffer_size": 1936,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "/**\n * Classe responsável pelos dados e regras de negócio de uma simulação.\n */\nclass Simulacao {\n\n    /**\n     * Método construtor\n     * @param int anoRecebimento => ano de recebimento.\n     * @param float valorRecebido => valor recebido.\n     * @param numeroDeMeses => número de meses.\n     */\n\tconstructor(anoRecebimento, valorRecebido, numeroDeMeses) {\n\n        /**\n         * Define os atributos da simulação a partir dos 3 parâmetros informados: anoRecebimento, valorRecebido e numeroDeMeses.\n         */\n\t\tthis._anoRecebimento = anoRecebimento;\n\t\tthis._valorRecebido = valorRecebido;\n\t\tthis._numeroDeMeses = numeroDeMeses;\n\n\t\tthis._setDataSource();\n\n        this._setAliquotas(); \n\n        this._setTetos();       \n\n        this._setValoresADeduzir();\n\n        this._setBaseDeCalculo();      \n\n        this._setTaxaSelic();  \n\n        this._setIrCobradoDevido();\n\n        this._setNovaBaseDeCalculo();\n\n        this._setIrARestituir();\n\n        this._setIrARestituirAtualizado();\n\n\n\t\tObject.freeze(this);\n\t}\n\n\n    /**\n     * Método que define o datasource, a fonte de dados, com a qual a simulação vai trabalhar para definir e calcular seus valores.\n     */\n    _setDataSource() {\n\n        this._dataSource = {\n            aliquotas: {\n                ate2009: {\n                    aliquotaSegundoPisoSegundoTeto: '0.15', //15%\n                    aliquotaTerceiroPisoTerceiroTeto: '0.275' //27,5%\n                },\n                aPartirDe2009: {\n                    aliquotaSegundoPisoSegundoTeto: '0.07', //7%\n                    aliquotaTerceiroPisoTerceiroTeto: '0.15', //15%\n                    aliquotaQuartoPisoQuartoTeto: '0.225', //22,5%\n                    aliquotaQuintoPiso: '0.275' //27,5%\n                }\n            },\n            //=SE($C$6<=(1164*$C$8)-0;($C$6*0)-0*$C$8;SE($C$6<=2326*$C$8;SE($C$6>=1164,01*$C$8;($C$6*0,15)-174,6*$C$8;0);SE($C$6>=2326,01*$C$8;($C$6*0,275)-465,35*$C$8;0)))\n            2005: {\n                taxaSelic: '1.2745', //127,45%\n                primeiroTeto: '1164.00',//ISENTO\n                segundoTeto: '2326.00',\n                valorADeduzirSegundoPisoSegundoTeto: '174.60',\n                valorADeduzirTerceiroPisoTerceiroTeto: '465.35'\n            },\n            //=SE($C$6<=(1257,12*$C$8)-0;($C$6*0)-0*$C$8;SE($C$6<=2512,08*$C$8;SE($C$6>=1257,13*$C$8;($C$6*0,15)-188,57*$C$8;0);SE($C$6>=2512,09*$C$8;($C$6*0,275)-502,58*$C$8;0)))\n            2006: {\n                taxaSelic: '1.1432', //114,32%\n                primeiroTeto: '1257.12',//ISENTO\n                segundoTeto: '2512.08',\n                valorADeduzirSegundoPisoSegundoTeto: '188.57',\n                valorADeduzirTerceiroPisoTerceiroTeto: '502.58'\n            },\n            //=SE($C$6<=(1313,69*$C$8)-0;($C$6*0)-0*$C$8;SE($C$6<=2625,12*$C$8;SE($C$6>=1313,7*$C$8;($C$6*0,15)-197,05*$C$8;0);SE($C$6>=2652,13*$C$8;($C$6*0,275)-525,19*$C$8;0)))\n            2007: {\n                taxaSelic: '1.0350', //103,50%\n                primeiroTeto: '1313.69',//ISENTO\n                segundoTeto: '2625.12',\n                valorADeduzirSegundoPisoSegundoTeto: '197.05',\n                valorADeduzirTerceiroPisoTerceiroTeto: '525.19'\n            },\n            //=SE($C$6<=(1372,81*$C$8)-0;($C$6*0)-0*$C$8;SE($C$6<=2743,25*$C$8;SE($C$6>=1372,82*$C$8;($C$6*0,15)-205,92*$C$8;0);SE($C$6>=2743,26*$C$8;($C$6*0,275)-548,82*$C$8;0)))\n            2008: {\n                taxaSelic: '0.9137', //91,37%\n                primeiroTeto: '1372.81',//ISENTO\n                segundoTeto: '2743.25',\n                valorADeduzirSegundoPisoSegundoTeto: '205.92',\n                valorADeduzirTerceiroPisoTerceiroTeto: '548.82'\n            },\n            //=SE($C$6<=(1434,59*$C$8)-0;($C$6*0)-0*$C$8;SE($C$6<=2150*$C$8;SE($C$6>=1434,6*$C$8;($C$6*0,075)-107,59*$C$8;0);SE($C$6<=2866,7*$C$8;SE($C$6>=2150,01*$C$8;($C$6*0,15)-268,84*$C$8;0);SE($C$6>=2866,71*$C$8;SE($C$6<=3582*$C$8;($C$6*0,225)-483,84*$C$8;SE($C$6>=3582,01*$C$8;($C$6*0,275)-662,94*$C$8;0))))))\n            2009: {\n                taxaSelic: '0.8274', //82.74%\n                primeiroTeto: '1434.59',//ISENTO\n                segundoTeto: '2150.00', //7,5%\n                terceiroTeto: '2866.70',//15%\n                quartoTeto: '3582.00',  //22,5%\n                valorADeduzirSegundoPisoSegundoTeto: '107.59',\n                valorADeduzirTerceiroPisoTerceiroTeto: '268.84',\n                valorADeduzirQuartoPisoQuartoTeto: '483.84',\n                valorADeduzirQuintoPiso: '662.94'\n            },\n            //=SE($C$6<=(1499,15*$C$8)-0;($C$6*0)-0*$C$8;SE($C$6<=2246,75*$C$8;SE($C$6>=1499,16*$C$8;($C$6*0,075)-112,43*$C$8;0);SE($C$6<=2995,7*$C$8;SE($C$6>=2246,76*$C$8;($C$6*0,15)-280,94*$C$8;0);SE($C$6>=2995,71*$C$8;SE($C$6<=3743,19*$C$8;($C$6*0,225)-505,62*$C$8;SE($C$6>=3743,2*$C$8;($C$6*0,275)-692,78*$C$8;0))))))\n            2010: {\n                taxaSelic: '0.7276', //72,76%\n                primeiroTeto: '1499.15',//ISENTO\n                segundoTeto: '2246.75', //7,5%\n                terceiroTeto: '2995.70',//15%\n                quartoTeto: '3743.19',  //22,5%\n                valorADeduzirSegundoPisoSegundoTeto: '112.43',\n                valorADeduzirTerceiroPisoTerceiroTeto: '280.94',\n                valorADeduzirQuartoPisoQuartoTeto: '505.62',\n                valorADeduzirQuintoPiso: '692.78'\n            },\n            //=SE($C$6<=(1566,61*$C$8)-0;($C$6*0)-0*$C$8;SE($C$6<=2347,85*$C$8;SE($C$6>=1566,62*$C$8;($C$6*0,075)-117,49*$C$8;0);SE($C$6<=3130,51*$C$8;SE($C$6>=2347,86*$C$8;($C$6*0,15)-293,58*$C$8;0);SE($C$6>=3130,52*$C$8;SE($C$6<=3911,63*$C$8;($C$6*0,225)-528,37*$C$8;SE($C$6>=3911,64*$C$8;($C$6*0,275)-723,95*$C$8;0))))))\n            2011: {\n                taxaSelic: '0.6188', //61,68%\n                primeiroTeto: '1566.61',//ISENTO\n                segundoTeto: '2347.85', //7,5%\n                terceiroTeto: '3130.51',//15%\n                quartoTeto: '3911.63',  //22,5%\n                valorADeduzirSegundoPisoSegundoTeto: '117.49',\n                valorADeduzirTerceiroPisoTerceiroTeto: '293.58',\n                valorADeduzirQuartoPisoQuartoTeto: '528.37',\n                valorADeduzirQuintoPiso: '723.95'\n            }\n        };\n    }    \n\n    /**\n     * Método que define, na simulação instanciada, a base de cálculo, o atributo baseDeCalculo.\n     */\n    _setBaseDeCalculo() {\n\n        this._pssRetido = this._valorRecebido * 0.11;\n        this._baseDeCalculo = this._valorRecebido - this._pssRetido;\n    }\n\n    /**\n     * Método que define, na simulação instanciada, a taxa selic, o atributo taxaSelic.\n     */\n    _setTaxaSelic() {\n\n       this._taxaSelic = this._dataSource[this._anoRecebimento].taxaSelic;\n    }\n\n    /**\n     * Método que define as alíquotas, a partir do datasource, a serem utilizadas em cálculos da simulação.\n     */\n    _setAliquotas() {\n\n        /**\n         * Até para o ano 2009, temos um domínio de alíquotas. Após 2009, outro.\n         */\n        if(this._anoRecebimento < 2009) {\n\n            this._aliquotaSegundoPisoSegundoTeto = this._dataSource.aliquotas.ate2009.aliquotaSegundoPisoSegundoTeto;\n            this._aliquotaTerceiroPisoTerceiroTeto = this._dataSource.aliquotas.ate2009.aliquotaTerceiroPisoTerceiroTeto;                \n        }\n        else {\n\n            this._aliquotaSegundoPisoSegundoTeto = this._dataSource.aliquotas.aPartirDe2009.aliquotaSegundoPisoSegundoTeto;\n            this._aliquotaTerceiroPisoTerceiroTeto = this._dataSource.aliquotas.aPartirDe2009.aliquotaTerceiroPisoTerceiroTeto;\n            this._aliquotaQuartoPisoQuartoTeto = this._dataSource.aliquotas.aPartirDe2009.aliquotaQuartoPisoQuartoTeto;\n            this._aliquotaQuintoPiso = this._dataSource.aliquotas.aPartirDe2009.aliquotaQuintoPiso;             \n        }\n    }   \n\n    /**\n     * Método que define os tetos, a partir do datasource, a serem utilizados em cálculos da simulação.\n     */\n    _setTetos() {\n\n        this._primeiroTeto = this._dataSource[this._anoRecebimento].primeiroTeto;\n        this._segundoTeto = this._dataSource[this._anoRecebimento].segundoTeto;        \n\n        /**\n         * Do ano de 2009 para frente, há mais duas faixas, mais dois tetos.\n         */\n        if(this._anoRecebimento >= 2009) {\n\n            this._quartoTeto = this._dataSource[this._anoRecebimento].quartoTeto;\n            this._terceiroTeto = this._dataSource[this._anoRecebimento].terceiroTeto;\n        }        \n    } \n\n    /**\n     * Método que define os valores a deduzir, a partir do datasource, de cada faixa.\n     */\n    _setValoresADeduzir () {\n\n        this._valorADeduzirSegundoPisoSegundoTeto = this._dataSource[this._anoRecebimento].valorADeduzirSegundoPisoSegundoTeto;        \n        this._valorADeduzirTerceiroPisoTerceiroTeto = this._dataSource[this._anoRecebimento].valorADeduzirTerceiroPisoTerceiroTeto;\n\n        /**\n         * De 2009 para frente, há mais duas faixas, mais dois valores a deduzir.\n         */\n        if(this._anoRecebimento >= 2009) {\n\n            this._valorADeduzirQuartoPisoQuartoTeto = this._dataSource[this._anoRecebimento].valorADeduzirQuartoPisoQuartoTeto;\n            this._valorADeduzirQuintoPiso = this._dataSource[this._anoRecebimento].valorADeduzirQuintoPiso;\n        }\n    }\n\n    /**\n     * Método que calcula o IR cobrado e devido.\n     */\n    _setIrCobradoDevido() {\n\n        /**\n         * Até 2009 é um cálculo. A partir de 2009, outro.\n         */\n        if(this._anoRecebimento < 2009) {\n\n            this._calculoAte2009();\n        }\n        else {\n\n            this._calculoAPartirDe2009();\n        }      \n    }\n\n    /**\n     * Método que define a nova base de cálculo da simulação.\n     */\n    _setNovaBaseDeCalculo() {\n\n        this._novaBaseDeCalculo = this._baseDeCalculo / this._numeroDeMeses;\n    }\n\n    /**\n     * Método que define o IR a ser restituido.\n     */\n    _setIrARestituir() {\n\n        this._irARestituir = this._irCobrado - this._irDevido;\n    }\n\n    /**\n     * Método que define o IR a reduzir atualizado.\n     */\n    _setIrARestituirAtualizado() {\n\n        this._irARestituirAtualizado = this._taxaSelic * (2 * this._irARestituir);\n    }\n\n    /**\n     * Getters. Métodos pelos quais acessaremos no controlador, os atributos de uma simulação.\n     */\n    get anoRecebimento() {\n\n        return this._anoRecebimento;\n    }\n\n    get valorRecebido() {\n\n        return this._valorRecebido;\n    }\n\n    get numeroDeMeses() {\n\n        return this._numeroDeMeses;\n    }    \n\n    get primeiroTeto() {\n\n        return this._primeiroTeto;\n    }\n\n    get segundoTeto() {\n\n        return this._segundoTeto;\n    }\n\n    get terceiroTeto() {\n\n        return this._terceiroTeto;\n    }  \n\n    get quartoTeto() {\n\n        return this._quartoTeto;\n    }          \n\n\tget pssRetido() {\n\n\t\treturn this._pssRetido;\n\t}\n\n\tget baseDeCalculo() {\n\n\t\treturn this._baseDeCalculo;\n\t}\n\n\tget taxaSelic() {\n\n\t\treturn this._taxaSelic;\n\t}\n\n\n\tget valorADeduzirSegundoPisoSegundoTeto() {\n\n\t\treturn this._valorADeduzirSegundoPisoSegundoTeto;\n\t}\n\n\tget valorADeduzirTerceiroPisoTerceiroTeto() {\n\n\t\treturn this._valorADeduzirTerceiroPisoTerceiroTeto;\n\t}\n\n    get valorADeduzirQuartoPisoQuartoTeto() {\n\n        return this._valorADeduzirQuartoPisoQuartoTeto;\n    }\n\n    get aliquotaSegundoPisoSegundoTeto() {\n\n        return this._aliquotaSegundoPisoSegundoTeto;\n    }\n\n    get aliquotaTerceiroPisoTerceiroTeto() {\n\n        return this._aliquotaTerceiroPisoTerceiroTeto;\n    }\n\n    get aliquotaQuartoPisoQuartoTeto() {\n\n        return this._aliquotaQuartoPisoQuartoTeto;\n    }\n\n    get aliquotaQuintoPiso() {\n\n        return this._aliquotaQuintoPisoQuintoTeto;\n    }\n\n    get irDevido() {\n\n        return this._irDevido;\n    }\n\n    get irCobrado() {\n\n        return this._irCobrado;\n    }\n\n    get novaBaseDeCalculo() {\n\n        return this._novaBaseDeCalculo;\n    }    \n\n    get irARestituir() {\n\n        return this._irARestituir;\n    }\n\n    get irARestituirAtualizado() {\n\n        return this._irARestituirAtualizado;\n    }\n\n    /**\n     * Método que executa os cálculos de IR cobrado e devido de uma simulação até o ano de 2009.\n     */\n\t_calculoAte2009()  {\n\n\t\tlet irDevido = 0.00;\n\t\tlet irCobrado = 0.00;\n                \n\n        if((this._primeiroTeto * this._numeroDeMeses) < this._valorRecebido && this._valorRecebido <= (this._segundoTeto * this._numeroDeMeses)) {\n            \n            irDevido = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - (this._valorADeduzirSegundoPisoSegundoTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - this._valorADeduzirSegundoPisoSegundoTeto;            \n        }\n        else if((this._segundoTeto * this._numeroDeMeses) < this._valorRecebido) {\n            \n            irDevido = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - (this._valorADeduzirTerceiroPisoTerceiroTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;                        \n        }\n\n        this._irDevido = irDevido;\n        this._irCobrado = irCobrado;\n\t}\n\n    _depuraCalculoAte2009() {\n\n        console.log(this._valorRecebido);\n\n        console.log(this._valorRecebido + ' < ' + (this._primeiroTeto * this._numeroDeMeses));\n\n        console.log((this._primeiroTeto * this._numeroDeMeses) + ' < ' + this._valorRecebido + ' || ' + this._valorRecebido + ' <= ' + (this._segundoTeto * this._numeroDeMeses));        \n\n        console.log((this._segundoTeto * this._numeroDeMeses) + ' < ' + this._valorRecebido);         \n    }\n\n    _depuraCalculoAPartirDe2009() {\n\n        console.log(this.valorRecebido);\n\n        console.log(this.valorRecebido + ' < ' + (this.primeiroTeto * this.numeroDeMeses));\n\n        console.log((this.primeiroTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido + ' && ' + this.valorRecebido + ' <= ' + (this.segundoTeto * this.numeroDeMeses));        \n\n        console.log((this.segundoTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido + ' && ' + this.valorRecebido + ' <= ' + (this.terceiroTeto * this.numeroDeMeses));        \n\n        console.log((this.terceiroTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido + ' && ' + this.valorRecebido + ' <= ' + (this.quartoTeto * this.numeroDeMeses));        \n\n        console.log((this.quartoTeto * this.numeroDeMeses) + ' < ' + this.valorRecebido);\n    }\n\n    /**\n     * Método que executa os cálculos de IR cobrado e devido de uma simulação a partir de 2009.\n     */\n    _calculoAPartirDe2009() {\n\n        let irDevido = 0.00;\n        let irCobrado = 0.00;\n\n\n        if((this._primeiroTeto * this._numeroDeMeses) < this._valorRecebido && this._valorRecebido <= (this._segundoTeto * this._numeroDeMeses)) {\n            \n            irDevido = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - (this._valorADeduzirSegundoPisoSegundoTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - this._valorADeduzirSegundoPisoSegundoTeto;            \n        }\n        else if((this._segundoTeto * this._numeroDeMeses) < this._valorRecebido && this._valorRecebido <= (this._terceiroTeto * this._numeroDeMeses)) {\n\n            irDevido = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - (this._valorADeduzirTerceiroPisoTerceiroTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;            \n        }\n        else if((this._terceiroTeto * this._numeroDeMeses) < this._valorRecebido && this._valorRecebido <= (this._quartoTeto * this._numeroDeMeses)) {\n            \n            irDevido = (this._baseDeCalculo * this._aliquotaQuartoPisoQuartoTeto) - (this._valorADeduzirQuartoPisoQuartoTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaQuartoPisoQuartoTeto) - _this.valorADeduzirQuartoPisoQuartoTeto;        \n        }\n        else if((this._quartoTeto * this._numeroDeMeses) < this._valorRecebido) {\n            \n            irDevido = (this._baseDeCalculo * this._aliquotaQuintoPiso) - (this._valorADeduzirQuintoPiso * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;            \n        }\n\n        this._irDevido = irDevido;\n        this._irCobrado = irCobrado;\n    }\n\n}\n",
-			"file": "js/app/models/Simulacao.js",
-			"file_size": 16895,
-			"file_write_time": 131693290023749595,
+			"file": "/C/alura/js_avancado_III/aluraframe/client/index.html",
 			"settings":
 			{
-				"buffer_size": 16388,
+				"buffer_size": 2362,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "=SE(\n\t$C$6<=(1372,81*$C$8)-0;($C$6*0%)-0*$C$8;SE(\n\t\t$C$6<=2743,25*$C$8;SE(\n\t\t\t$C$6>=1372,82*$C$8;($C$6*15%)-205,92*$C$8;0\n\t\t);SE(\n\t\t\t$C$6>=2743,26*$C$8;($C$6*27,5%)-548,82*$C$8;0\n\t\t)\n\t)\n)\n\n<?php \n\nif($C$6<=(1372,81*$C$8)-0) {\n\n\t$C$6<=(1372,81*$C$8)-0;\n}\nelseif($C$6<=2743,25*$C$8)",
-			"settings":
-			{
-				"buffer_size": 280,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/wamp64/www/excel/index.php",
-			"settings":
-			{
-				"buffer_size": 3146,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "/**\n * Classe auxiliar de formatação numérica.\n */\nclass NumeroHelper {\n\n\n\tstatic formataMoeda(valor) {\n\n\tlet v = valor;\n\t\tv = v.replace(/\\D/g, \"\"); //permite digitar apenas números \n\t\tv = v.replace(/[0-9]{12}/, \"inválido\"); //limita pra máximo 999.999.999,99 \n\t\tv = v.replace(/(\\d{1})(\\d{8})$/, \"$1.$2\"); //coloca ponto antes dos últimos 8 digitos \n\t\tv = v.replace(/(\\d{1})(\\d{5})$/, \"$1.$2\"); //coloca ponto antes dos últimos 5 digitos \n\t\tv = v.replace(/(\\d{1})(\\d{1,2})$/, \"$1,$2\"); //coloca virgula antes dos últimos 2 digitos \n\t\treturn v;\n\t}\n  \n}",
-			"file": "js/app/helpers/NumeroHelper.js",
-			"file_size": 577,
-			"file_write_time": 131693229666725250,
-			"settings":
-			{
-				"buffer_size": 551,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -213,9 +172,21 @@
 	"command_palette":
 	{
 		"height": 137.0,
-		"last_filter": "Package Control: inst",
+		"last_filter": "Package Control: insta",
 		"selected_items":
 		[
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
 			[
 				"Package Control: inst",
 				"Package Control: Install Package"
@@ -237,18 +208,6 @@
 				"Package Control: Remove Package"
 			],
 			[
-				"Package Control: ",
-				"Package Control: Remove Package"
-			],
-			[
-				"Package Control: ins",
-				"Package Control: Install Package"
-			],
-			[
-				"Package Control: insta",
-				"Package Control: Install Package"
-			],
-			[
 				"Package Control:install",
 				"Package Control: Install Package"
 			],
@@ -265,7 +224,7 @@
 				"Set Syntax: Ruby on Rails"
 			]
 		],
-		"width": 444.0
+		"width": 540.0
 	},
 	"console":
 	{
@@ -287,19 +246,30 @@
 	},
 	"expanded_folders":
 	[
-		"/C/wamp64/www/simulador_calc_rra"
+		"/C/alura/js_avancado_III",
+		"/C/alura/js_avancado_III/aluraframe",
+		"/C/alura/js_avancado_III/aluraframe/client",
+		"/C/alura/js_avancado_III/aluraframe/client/js",
+		"/C/alura/js_avancado_III/aluraframe/client/js/app"
 	],
 	"file_history":
 	[
-		"/C/alura/js_avancado_III/aluraframe/client/index.html",
-		"/C/alura/js_avancado_III/aluraframe/client/js/app/controllers/NegociacaoController.js",
-		"/C/alura/js_avancado_III/aluraframe/client/js/app/models/Negociacao.js",
-		"/C/wamp64/www/simulador_calc_rra/js/app/helpers/NumeroHelper.js",
-		"/C/alura/js_avancado_II/aluraframe/client/index.html",
-		"/C/alura/js_avancado_II/aluraframe/client/js/app/views/NegociacoesView.js",
+		"/C/wamp64/www/simulador_calc_rra/visualiza_vrl_precatorio_jud.asp",
 		"/C/alura/js_avancado_II/aluraframe/client/js/app/services/NegociacaoService.js",
 		"/C/alura/js_avancado_II/aluraframe/client/js/app/controllers/NegociacaoController.js",
+		"/C/Users/Vinicius/AppData/Roaming/Sublime Text 3/Packages/SublimeTmpl/Side Bar.sublime-menu",
+		"/C/alura/js_avancado_III/aluraframe/client/aprendendo_indexeddb.html",
+		"/C/alura/js_avancado_II/aluraframe/client/index.html",
+		"/C/alura/js_avancado_II/aluraframe/client/js/app/views/NegociacoesView.js",
 		"/C/alura/js_avancado_II/aluraframe/client/js/app/models/ListaNegociacoes.js",
+		"/C/alura/js_avancado_II/aluraframe/client/js/app/services/HttpService.js",
+		"/C/alura/js_avancado_II/aluraframe/client/js/app/helpers/DateHelper.js",
+		"/C/alura/js_avancado_II/aluraframe/server/app/api/index.js",
+		"/C/alura/js_avancado_II/aluraframe/client/js/app/models/Mensagem.js",
+		"/C/alura/js_avancado_II/aluraframe/client/js/app/views/View.js",
+		"/C/alura/js_avancado_II/aluraframe/client/js/app/services/ProxyFactory.js",
+		"/C/alura/js_avancado_II/aluraframe/client/js/app/helpers/Bind.js",
+		"/C/alura/js_avancado_II/aluraframe/client/js/app/models/Negociacao.js",
 		"/C/alura/js_avancado_I/javascript-avancado-i-aula1/aluraframe/client/js/app/controllers/NegociacaoController.js",
 		"/C/xampp/php/php.ini",
 		"/C/Users/VinBDias/AppData/Roaming/Sublime Text 3/Packages/Laravel 5 Artisan/Laravel 5 Artisan.sublime-settings",
@@ -356,13 +326,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"type=\"number\"",
-			".baseDeCalculo",
-			".pssRetido",
-			",",
-			"valor",
-			"]_",
-			"_setValoresADeduzir",
+			"                    \n",
+			");            \t           ",
+			"view",
 			"crypt"
 		],
 		"highlight": true,
@@ -371,7 +337,6 @@
 		"regex": false,
 		"replace_history":
 		[
-			"type=\"text\""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -382,24 +347,24 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "index.html",
+					"file": "/C/alura/js_avancado_III/aluraframe/client/js/app/services/NegociacaoService.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8980,
+						"buffer_size": 2593,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8447,
-								8447
+								0,
+								0
 							]
 						],
 						"settings":
@@ -407,244 +372,169 @@
 							"SL.14.region_keys":
 							[
 							],
-							"SL.17.region_keys":
+							"SL.33.region_keys":
 							[
-								"sublime_linter.protected_regions",
-								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.jshint.Highlights.|689523c788da9863441f006181083830a47313f878a3fa1302a1f6915eef3fa3|source.js meta.function-call.method.js support.function.dom.js|1316"
-							],
-							"auto_complete": false,
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1620.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "js/app/controllers/SimulacaoController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6131,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2999,
-								2999
-							]
-						],
-						"settings":
-						{
-							"SL.14.region_keys":
-							[
-								"SL.jshint.Highlights.|9e2fe687ab913d003a485677c6a582749fa6cd31b9676a9e06d0feb1c82f5d10|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.jshint.Highlights.|82649e67c2bbfaa9a24d71e6511d9677ab5b2fa280f013912fff0ebdfb284f88|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"sublime_linter.protected_regions",
-								"SL.jshint.Highlights.|1653f157b4cd549eb3b25174ae9c60bf558777cde92eb4d4bf9daaa35ff3eada|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|5308411d1b8a1d219edeaa00d05f813551254e5ce13a425f0f880640c6e29270|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|84c12022cfe8c83b13974ee609e7cad0e99fcbe1910c95f413647e433b9b6605|source.js meta.function-call.method.js support.function.dom.js|1316"
-							],
-							"SL.15.region_keys":
-							[
-							],
-							"SL.20.region_keys":
-							[
-								"SL.jshint.Highlights.|eeb201ff6811aebd54fcbf6ab2ee004ed3efa1432fca2d8e8fb1afd06d8b5504|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.jshint.Highlights.|20861869cd30af3245c350d006b9a9e2560eb764733a8498c89d8de4564809fd|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Gutter.source.js meta.function-call.method.js support.function.dom.js.Packages/SublimeLinter/gutter-themes/Default/pointer.png",
 								"sublime_linter.protected_regions"
 							],
-							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1170.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "js/app/models/Simulacao.js",
+					"buffer": 1,
+					"file": "/C/alura/js_avancado_III/aluraframe/client/js/app/controllers/NegociacaoController.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16388,
+						"buffer_size": 1828,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1760,
-								1920
+								528,
+								528
 							]
 						],
 						"settings":
 						{
 							"SL.15.region_keys":
 							[
-								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.jshint.Highlights.|e0f5fa6b3b4a20fb9b88713f8bdc88c39e6a0b264f95518489cc253fdfd706b3|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"sublime_linter.protected_regions",
-								"SL.jshint.Highlights.|1fe6d727b04223fea475f5933d8add9a1c0b6b77a5364e426f85f5c740f26921|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|84c12022cfe8c83b13974ee609e7cad0e99fcbe1910c95f413647e433b9b6605|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|261044e07e43a8ebb8698c75112d2ace0183913b468844dc94128bc6925711ca|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|8900f0753bb6db8e4e26286a4ee419b1efc3f4c651f293fc905581e8d24291e7|source.js meta.function-call.method.js support.function.dom.js|1316"
 							],
-							"SL.16.region_keys":
+							"SL.37.region_keys":
 							[
-							],
-							"SL.19.region_keys":
-							[
-								"SL.jshint.Highlights.|cc0098703ad2c662bbb6fffc6c7782e4550df9e1397621ba0b588e3a3ac83d71|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|348d185726a5080b1cbe4fee9081c37bf4c8f88d7b1807d1dd7af41877f7a522|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.jshint.Highlights.|5205711552ea4cfdc578993083a5da322f4b7d23ea1c23b326c0b5d3aa128eb6|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|source.js meta.function-call.method.js support.function.dom.js|32",
 								"sublime_linter.protected_regions",
-								"SL.jshint.Highlights.|6248d3c6cf1a2b10c8e51ae7282c7009de71ba6f9aa196cdef274190de0e4c09|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|689523c788da9863441f006181083830a47313f878a3fa1302a1f6915eef3fa3|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|be03abd1bcb83e12dba543b21697cdee51db6833c33c49c89eb4622aadc48021|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|eeb201ff6811aebd54fcbf6ab2ee004ed3efa1432fca2d8e8fb1afd06d8b5504|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|00579f203f4634bbdd9599ffa8038c2ad1b7b37ba7e81bd35c673b4987997ddd|source.js meta.function-call.method.js support.function.dom.js|1316"
+								"SL.jshint.Gutter.source.js meta.function-call.method.js support.function.dom.js.Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|source.js meta.function-call.method.js support.function.dom.js|1316"
 							],
-							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 633.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 280,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								258,
-								258
-							]
-						],
-						"settings":
-						{
-							"SL.17.region_keys":
-							[
-							],
-							"SL.24.region_keys":
-							[
-								"sublime_linter.protected_regions",
-								"SL.php.Gutter.|source.js meta.block.js keyword.operator.assignment.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.php.Highlights.|b5d9b25c260fa8f3e15bc359a7acf314c21e768e4359f957b8be3e494e8a5379|source.js meta.block.js keyword.operator.assignment.js|1316"
-							],
-							"auto_complete": false,
-							"default_dir": "C:\\wamp64\\www\\simulador_calc_rra\\js\\app\\models",
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/C/wamp64/www/excel/index.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3146,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1988,
-								1988
-							]
-						],
-						"settings":
-						{
-							"SL.18.region_keys":
-							[
-							],
-							"SL.25.region_keys":
-							[
-								"sublime_linter.protected_regions"
-							],
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1350.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "js/app/helpers/NumeroHelper.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 551,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								46,
-								46
-							]
-						],
-						"settings":
-						{
-							"SL.19.region_keys":
-							[
-							],
-							"SL.23.region_keys":
-							[
-								"sublime_linter.protected_regions",
-								"SL.jshint.Highlights.|9600667f8ea2495a73dae11c354e177f1ee208ba35b37331458e82569d725993|source.js meta.function-call.method.js support.function.dom.js|32",
-								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.jshint.Highlights.|84c12022cfe8c83b13974ee609e7cad0e99fcbe1910c95f413647e433b9b6605|source.js meta.function-call.method.js support.function.dom.js|1316"
-							],
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/alura/js_avancado_III/aluraframe/client/aprendendo_indexeddb.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1936,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1130,
+								1130
+							]
+						],
+						"settings":
+						{
+							"SL.16.region_keys":
+							[
+								"SL.jshint.Highlights.|65de82e60e2237f0fbd776e7f21a85ff8c68259a9b761bd2781f560ad277874e|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|5cdde50a07f141837cb261de91e0a84a5075bb009e2e36bdf783391845a64607|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|7a8c69d26e34e10faf396be7e5ff0e2083ea205434ea2c4c1271e4dcd0dca846|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|bec04441f20eb201c068c7ec85b4ab7f9eae508ec66a093322e48c6d017741d9|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|664248358a3d76e875a39068cbbfba5641f795ca4a72e7cf7341c541e67d4e2f|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|185f361796b08afa705294d0623cca72b23931d4b61764864d9551cd00eed4ee|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|55e9cf92ba39c377a8cf754c298d76f3893527a170d0d4d62a790f2d1581b1e3|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|5bef2f62785db7301e790f7050d696180ef1421d340cb141625604360dda183d|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|a97aa4511c36c7cc6dfe372c3b97027465c7d9ab09e184f566544033833e8005|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|d7c3a4c3b7ffb5347a9b88ae17b4b54544ed5d6daf8646eb9f0b5a2c0e8c957b|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|888cc515d481cd4e5fd97d5475d8dbf84148b1dd492169cc413bea598c8b7378|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|82efe75096a0ee084909b966dbc8c19e7616f893cba723f2a3e6b945619634a4|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|85850897f6277f3b24e31a27a0ee47640f8b92db7d1691248caf9d2556899483|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|3030a0342b75e2fad389faf792281999bf25c1be86d0f210a08dc45979bff492|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|3fdba2119a7a6e857da4a933573bb1745d821a7112b13951d5c13d6c5692233d|source.js meta.function-call.method.js support.function.dom.js|32",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|17bdc0a4f2044cf59e948bb00b7fea913aae7b58407ba95773add9b9e4a51856|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|07939bb2da6ebfed9e5a5ac725afe21b15bc9d0743d370a85c1945d52b1ec2f0|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|b79d25e7869655a1b7642843cfe153a646fb6defd4f50c0b2118b77cb9e9bbf5|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|6631efb6609df3f94f1de591fdd5036f4abb8be5f1b08b6e1835456366f7ab6f|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|b052db953ba4470b8a3d4efe9c9e1c40759dbfca6eed0413e6ea0514d8171cf8|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png"
+							],
+							"SL.23.region_keys":
+							[
+								"SL.jshint.Highlights.|664248358a3d76e875a39068cbbfba5641f795ca4a72e7cf7341c541e67d4e2f|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|b1e4bd57260a290489acda4a7453b82046046949e5e54685ca3605ff86c0a91d|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|aa18222f769a2640f4e57dd900ffcf18e180a7b6d83bdd70337197821f559510|source.js meta.function-call.method.js support.function.dom.js|32",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|a97aa4511c36c7cc6dfe372c3b97027465c7d9ab09e184f566544033833e8005|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|5a5a2e1f1fc639a9cfe0ac41ffae227a16d0cbad4eb0565b4c5568396d1b036c|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|5400ce8f945fa2aee3646ed433850d20add5b08fc13778d7d633fa405c0328ff|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|78eb365f5b58dcb4d60b6b4725361041da313d5d8d5bb5fad58a6e643dee03d2|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|f56e01c129167c4fe2e35a322f2fa30d8e62b5593b394e54de8fde23e9e6c687|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Highlights.|a05270e64cdebed7992320bace9aae1a39e0a594af64bb382d4fcc58303e3cb6|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|a5ded4fba608d84bc0393ec77d162ae90231cd270f702cc00dacb9fc2c16dd2e|source.js meta.function-call.method.js support.function.dom.js|32",
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|5ab9f60cdc35123362ccae19f3c3c9e60ff6bcebdc5c731e45f61a514d96d9f3|source.js meta.function-call.method.js support.function.dom.js|32"
+							],
+							"auto_complete": false,
+							"default_extension": "html",
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/alura/js_avancado_III/aluraframe/client/index.html",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2362,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"SL.19.region_keys":
+							[
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|124ae47c750ed3a94a76bc20e4f94a450af80279921f17c94ce6e39d8b7afce4|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions"
+							],
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

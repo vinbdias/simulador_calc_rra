@@ -44,12 +44,14 @@ class SimulacaoController {
          * Método que executa as simulações da página.
          * @param Event event => evento que acionou a execução das simulações.
          */
-        executarSimulacoes(event) {
+        executarSimulacoes(event) {            
 
             /**
              * Evita a execução padrão do evento para que se tenha total controle da execução.
              */
             event.preventDefault();
+
+            if(!this._validarDadosDeEntrada()) return false;
 
             /**
              * Chama os métodos de exeução das simulações do ano informado e dos outros.
@@ -57,6 +59,57 @@ class SimulacaoController {
             this._executarSimulacaoAnoInformado();
             this._executarSimulacaoDe2005A2011();
 
+        }
+
+        /**
+         * Método que valida os dados de entrada.        
+         */
+        _validarDadosDeEntrada() {
+
+            event.preventDefault();
+
+            let valido = true;
+
+            if(!this._inputAnoRecebimento.value) {
+
+                this._inputAnoRecebimento.placeholder = 'Informe o ano.';
+                this._inputAnoRecebimento.style.borderColor = 'red';
+
+                valido = false;
+            }
+            else {
+
+                this._inputAnoRecebimento.placeholder = '';
+                this._inputAnoRecebimento.style.borderColor = '';
+            }
+
+            if(!this._inputValorRecebido.value) {
+
+                this._inputValorRecebido.placeholder = 'Informe o valor.';
+                this._inputValorRecebido.style.borderColor = 'red';
+
+                valido = false;
+            }
+            else {
+
+                this._inputValorRecebido.placeholder = '';
+                this._inputValorRecebido.style.borderColor = '';                
+            }
+
+            if(!this._inputNumeroDeMeses.value) {
+
+                this._inputNumeroDeMeses.placeholder = 'Informe meses.';
+                this._inputNumeroDeMeses.style.borderColor = 'red';
+
+                valido = false;
+            }
+            else {
+
+                this._inputNumeroDeMeses.placeholder = '';
+                this._inputNumeroDeMeses.style.borderColor = '';                
+            }
+
+            return valido;            
         }
 
         /**

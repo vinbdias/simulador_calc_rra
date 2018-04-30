@@ -21,7 +21,7 @@
 
                     <div class="form-group row">
                         <label for="anoRecebimento" class="col-sm-8 col-form-label">Ano recebimento:</label>
-                        <select name="anoRecebimento" id="anoRecebimento" class="col-sm-4 form-control text-right" required>
+                        <select onblur="simulacaoController.executarSimulacoes(event)" name="anoRecebimento" id="anoRecebimento" class="col-sm-4 form-control text-right" required>
                             <option value="2005">2005</option>
                             <option value="2006">2006</option>
                             <option value="2007">2007</option>
@@ -34,7 +34,7 @@
 
                     <div class="form-group row">
                         <label for="valorRecebido" class="col-sm-8 col-form-label">Valor recebido:</label>
-                        <input onkeyup="simulacaoController.formataValorRecebido(event)" class="col-sm-4 form-control text-right" name="valorRecebido" id="valorRecebido" required />
+                        <input onkeyup="simulacaoController.formataValorRecebido(event)" onblur="simulacaoController.executarSimulacoes(event)" class="col-sm-4 form-control text-right" name="valorRecebido" id="valorRecebido" required />
                     </div>
 
                     <div class="form-group row">
@@ -54,7 +54,7 @@
 
                     <div class="form-group row">
                         <label for="numeroDeMeses" class="col-sm-8 col-form-label">Número de meses:</label>
-                        <input type="text" class="col-sm-4 form-control text-right" name="numeroDeMeses" id="numeroDeMeses" required />
+                        <input onblur="simulacaoController.executarSimulacoes(event)" type="text" class="col-sm-4 form-control text-right" name="numeroDeMeses" id="numeroDeMeses" required />
                     </div>
 
                     <div class="form-group row">
