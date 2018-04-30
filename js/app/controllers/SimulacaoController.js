@@ -67,7 +67,7 @@ class SimulacaoController {
             /**
              * Cria uma simulação a partir do ano informado no input '#anoRecebimento', já obtendo todos os dados a serem exibidos nos campos vazios da tela.
              */
-            this._simulacao = this._criarSimulacao(parseInt(this._inputAnoRecebimento.value));
+            this._simulacao = this._criarSimulacao(this._inputAnoRecebimento.value);
 
             /**
              * Imprime os dados nos respectivos inputs, formatando como valor moeda BRL (R$).

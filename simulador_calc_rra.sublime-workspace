@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"_ir",
+				"_irARestituir"
+			],
+			[
+				"_ali",
+				"_aliquotaTerceiroPisoTerceiroTeto"
+			],
+			[
+				"_a",
+				"_anoRecebimento"
+			],
+			[
+				"_",
+				"_anoRecebimento"
+			],
+			[
+				"valo",
+				"valorRecebido"
+			],
+			[
+				"va",
+				"valorRecebido"
+			],
+			[
+				"valor",
+				"valorADeduzirSegundoPisoSegundoTeto"
+			],
+			[
 				"_negoc",
 				"_negociacoesView"
 			],
@@ -56,10 +84,6 @@
 				"Negociacao\t(Negociacao.js)"
 			],
 			[
-				"va",
-				"valor\t(index.html)"
-			],
-			[
 				"text",
 				"textContent"
 			],
@@ -83,7 +107,8 @@
 			"file": "js/app/controllers/SimulacaoController.js",
 			"settings":
 			{
-				"buffer_size": 1387,
+				"buffer_size": 6040,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
@@ -91,7 +116,17 @@
 			"file": "js/app/models/Simulacao.js",
 			"settings":
 			{
-				"buffer_size": 11318,
+				"buffer_size": 16059,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/app/helpers/NumeroHelper.js",
+			"settings":
+			{
+				"buffer_size": 544,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -178,14 +213,19 @@
 	},
 	"expanded_folders":
 	[
-		"/C/wamp64/www/simulador_calc_rra",
-		"/C/wamp64/www/simulador_calc_rra/js",
-		"/C/wamp64/www/simulador_calc_rra/js/app",
-		"/C/wamp64/www/simulador_calc_rra/js/app/controllers",
-		"/C/wamp64/www/simulador_calc_rra/js/app/models"
+		"/C/simulador_calc_rra",
+		"/C/simulador_calc_rra/js",
+		"/C/simulador_calc_rra/js/app",
+		"/C/simulador_calc_rra/js/app/controllers",
+		"/C/simulador_calc_rra/js/app/helpers",
+		"/C/simulador_calc_rra/js/app/models"
 	],
 	"file_history":
 	[
+		"/C/simulador_calc_rra/js/app/models/Simulacao.js",
+		"/C/simulador_calc_rra/js/app/controllers/SimulacaoController.js",
+		"/C/simulador_calc_rra/index.html",
+		"/C/simulador_calc_rra/simulador_calc_rra.sublime-project",
 		"/C/alura/js_avancado_II/aluraframe/client/index.html",
 		"/C/alura/js_avancado_II/aluraframe/client/js/app/views/NegociacoesView.js",
 		"/C/alura/js_avancado_II/aluraframe/client/js/app/services/NegociacaoService.js",
@@ -233,7 +273,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -247,6 +287,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_SETALI",
+			"irCobradoDevido",
+			"_calculoAPartirDe2009",
+			"configuracoesAnos",
+			"_configuracoesAnos",
 			"crypt"
 		],
 		"highlight": true,
@@ -255,6 +300,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"_dataSource"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -265,7 +311,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -274,35 +320,29 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1387,
+						"buffer_size": 6040,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1966,
+								1966
 							]
 						],
 						"settings":
 						{
-							"SL.20.region_keys":
-							[
-								"SL.jshint.Highlights.|eeb201ff6811aebd54fcbf6ab2ee004ed3efa1432fca2d8e8fb1afd06d8b5504|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.jshint.Highlights.|20861869cd30af3245c350d006b9a9e2560eb764733a8498c89d8de4564809fd|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"sublime_linter.protected_regions"
-							],
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": true,
+							"word_separators": "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 405.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -311,41 +351,57 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11318,
+						"buffer_size": 16059,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1615,
-								1615
+								14177,
+								14177
 							]
 						],
 						"settings":
 						{
-							"SL.19.region_keys":
-							[
-								"SL.jshint.Highlights.|cc0098703ad2c662bbb6fffc6c7782e4550df9e1397621ba0b588e3a3ac83d71|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|348d185726a5080b1cbe4fee9081c37bf4c8f88d7b1807d1dd7af41877f7a522|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.jshint.Highlights.|5205711552ea4cfdc578993083a5da322f4b7d23ea1c23b326c0b5d3aa128eb6|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"sublime_linter.protected_regions",
-								"SL.jshint.Highlights.|6248d3c6cf1a2b10c8e51ae7282c7009de71ba6f9aa196cdef274190de0e4c09|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|689523c788da9863441f006181083830a47313f878a3fa1302a1f6915eef3fa3|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|be03abd1bcb83e12dba543b21697cdee51db6833c33c49c89eb4622aadc48021|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|eeb201ff6811aebd54fcbf6ab2ee004ed3efa1432fca2d8e8fb1afd06d8b5504|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|00579f203f4634bbdd9599ffa8038c2ad1b7b37ba7e81bd35c673b4987997ddd|source.js meta.function-call.method.js support.function.dom.js|1316"
-							],
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": true,
+							"word_separators": "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?"
 						},
 						"translation.x": 0.0,
-						"translation.y": 720.0,
+						"translation.y": 5891.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/app/helpers/NumeroHelper.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								72,
+								72
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -382,10 +438,6 @@
 		]
 	},
 	"menu_visible": true,
-	"output.SublimeLinter":
-	{
-		"height": 0.0
-	},
 	"output.find_results":
 	{
 		"height": 0.0
