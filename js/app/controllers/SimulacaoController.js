@@ -55,7 +55,7 @@ class SimulacaoController {
              * Chama os métodos de exeução das simulações do ano informado e dos outros.
              */
             this._executarSimulacaoAnoInformado();
-            //this._executarSimulacaoDe2005A2011();
+            this._executarSimulacaoDe2005A2011();
 
         }
 
