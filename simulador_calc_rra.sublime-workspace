@@ -4,16 +4,32 @@
 		"selected_items":
 		[
 			[
+				"parse",
+				"parseFloat"
+			],
+			[
+				"_in",
+				"_inputPssRetido"
+			],
+			[
+				"format",
+				"formataPssRetido\t(SimulacaoController.js)"
+			],
+			[
+				"onkey",
+				"onkeyup\tAttr"
+			],
+			[
+				"ir",
+				"irCobrado\t(Simulacao.js)"
+			],
+			[
 				"exe",
 				"executarSimulacoes"
 			],
 			[
 				"ex",
 				"executarSimulacoes"
-			],
-			[
-				"_in",
-				"_inputAnoRecebimento"
 			],
 			[
 				"simula",
@@ -143,6 +159,42 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "js/app/models/Simulacao.js",
+			"settings":
+			{
+				"buffer_size": 10499,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/app/datasource/DataSource.js",
+			"settings":
+			{
+				"buffer_size": 3527,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/app/controllers/SimulacaoController.js",
+			"settings":
+			{
+				"buffer_size": 8248,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 9494,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -229,7 +281,9 @@
 		"/C/wamp64/www/simulador_calc_rra",
 		"/C/wamp64/www/simulador_calc_rra/js",
 		"/C/wamp64/www/simulador_calc_rra/js/app",
-		"/C/wamp64/www/simulador_calc_rra/js/app/controllers"
+		"/C/wamp64/www/simulador_calc_rra/js/app/controllers",
+		"/C/wamp64/www/simulador_calc_rra/js/app/datasource",
+		"/C/wamp64/www/simulador_calc_rra/js/app/models"
 	],
 	"file_history":
 	[
@@ -296,7 +350,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -310,6 +364,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"5898,15",
 			"                    \n",
 			");            \t           ",
 			"view",
@@ -331,8 +386,167 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "js/app/models/Simulacao.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10499,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								808,
+								808
+							]
+						],
+						"settings":
+						{
+							"SL.57.region_keys":
+							[
+								"SL.jshint.Highlights.|6491c250b49768da88c4d8c18b294ab5d8d0d98cd657f13cbb1a96261bf953bb|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|84c12022cfe8c83b13974ee609e7cad0e99fcbe1910c95f413647e433b9b6605|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|f378b519e2e6d1b12d7a386af3f31abca1ec27b38bfa54638c89be52fd831d49|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|3ac72345437a7fbfbb37225d53fc39152263856bfe9d884d9916d89b9c4df416|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|a60e62f088e8fe3806328deef7a804c46a3171a3df48ffa85178f76970c75e7c|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"sublime_linter.protected_regions"
+							],
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/app/datasource/DataSource.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3527,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1204,
+								1204
+							]
+						],
+						"settings":
+						{
+							"SL.59.region_keys":
+							[
+								"SL.jshint.Highlights.|eeb201ff6811aebd54fcbf6ab2ee004ed3efa1432fca2d8e8fb1afd06d8b5504|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"sublime_linter.protected_regions"
+							],
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/app/controllers/SimulacaoController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8248,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8191,
+								8191
+							]
+						],
+						"settings":
+						{
+							"SL.58.region_keys":
+							[
+								"SL.jshint.Highlights.|84c12022cfe8c83b13974ee609e7cad0e99fcbe1910c95f413647e433b9b6605|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|398eb5317bd03a06a8dbbec519d75eb0006ef95213f49ca283a1e204f0dad282|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|2f4f9ee9be34677b9996470a7d912fd2917ec0aca36e7bee751a5bff07b544fc|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|d452f5198f0cbfd6f3ca840c4a995cbe5c9d4b241bbbfd0d6505ce0a7b7e57f7|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|82649e67c2bbfaa9a24d71e6511d9677ab5b2fa280f013912fff0ebdfb284f88|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|18fc77337fa4bf8b6d22984059f4bb9b7625928757096b159ff0015600e115ec|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|b1f98d54ba5bc387c4c55e4332e587603921ecf45b166f1943fe6a485bd127d1|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"sublime_linter.protected_regions"
+							],
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2565.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9494,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2524,
+								2524
+							]
+						],
+						"settings":
+						{
+							"SL.60.region_keys":
+							[
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|e7b6b06f6927f3677e9e6b50e2582b068e54a48c8feb9a1b7a548bcc0b417827|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions"
+							],
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 900.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],
