@@ -51,7 +51,7 @@ class SimulacaoController {
              */
             event.preventDefault();
 
-            if(!this._validarDadosDeEntrada()) return false;
+            //if(!this._validarDadosDeEntrada()) return false;
 
             /**
              * Chama os métodos de exeução das simulações do ano informado e dos outros.
@@ -192,7 +192,7 @@ class SimulacaoController {
 
             let valorRecebido = this._inputValorRecebido.value.replace('.', '').replace(',', '.');
 
-            return new Simulacao(anoInformado, valorRecebido, this._inputNumeroDeMeses.value);
+            return new Simulacao(anoInformado, parseFloat(valorRecebido), parseInt(this._inputNumeroDeMeses.value));
         }
 
 }
