@@ -39,7 +39,7 @@
 
                     <div class="form-group row">
                         <label for="pssRetido" class="col-sm-8 col-form-label">PSS retido:</label>
-                        <input type="text" class="col-sm-4 form-control text-right" name="pssRetido" id="pssRetido" disabled="true" />
+                        <input onkeyup="simulacaoController.formataPssRetido(event)" value="4.950,00" type="text" class="col-sm-4 form-control text-right" name="pssRetido" id="pssRetido" />
                     </div>
 
                     <div class="form-group row">
@@ -82,7 +82,7 @@
                 </form>
             </div>
 
-            <div class="col-md-7" style="margin-bottom:60px;">
+<!--             <div class="col-md-7" style="margin-bottom:60px;">
                 <table width="100%" border="0" cellspacing="5" cellpadding="5" class="table text-center table-striped table-bordered">
                     <thead class="thead-dark ">
                         <tr>
@@ -145,7 +145,7 @@
                 </table>
 
 
-            </div>
+            </div> -->
         </div>
     </div>
     <script type="text/javascript" src="js/app/helpers/NumeroHelper.js"></script>

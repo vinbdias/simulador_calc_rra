@@ -7,15 +7,17 @@ class Simulacao {
      * Método construtor
      * @param int anoRecebimento => ano de recebimento.
      * @param float valorRecebido => valor recebido.
+     * @param float pssRetido => pss retido.
      * @param numeroDeMeses => número de meses.
      */
-	constructor(anoRecebimento, valorRecebido, numeroDeMeses) {
+	constructor(anoRecebimento, valorRecebido, pssRetido, numeroDeMeses) {
 
         /**
          * Define os atributos da simulação a partir dos 3 parâmetros informados: anoRecebimento, valorRecebido e numeroDeMeses.
          */
 		this._anoRecebimento = anoRecebimento;
 		this._valorRecebido = valorRecebido;
+        this._pssRetido = pssRetido;
 		this._numeroDeMeses = numeroDeMeses;
 
 		this._setDataSource();
@@ -56,7 +58,7 @@ class Simulacao {
      */
     _setBaseDeCalculo() {
 
-        this._pssRetido = this._valorRecebido * 0.11;
+        //this._pssRetido = this._valorRecebido * 0.11;
         this._baseDeCalculo = this._valorRecebido - this._pssRetido;
     }
 

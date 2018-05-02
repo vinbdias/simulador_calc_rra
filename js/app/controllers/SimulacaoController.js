@@ -33,12 +33,25 @@ class SimulacaoController {
 
         /**
          * Método que formata o valor do campo '#valorRecebido', mediante um evento da página.
+         * @param Event event => evento que acionou a formatação do valor do campo '#valorRecebido'.
          */
-        formataValorRecebido() {
+        formataValorRecebido(event) {
+
+            event.preventDefault();
 
             this._inputValorRecebido.value = NumeroHelper.formataMoeda(this._inputValorRecebido.value);
         }
 
+        /**
+         * Método que formata o valor do campo '#pssRetido', mediante um evento da página.
+         * @param Event event => evento que acionou a formatação do valor do campo '#pssRetido'.
+         */
+        formataPssRetido(event) {
+
+            event.preventDefault();
+
+            this._inputPssRetido.value = NumeroHelper.formataMoeda(this._inputPssRetido.value);
+        }
 
         /**
          * Método que executa as simulações da página.
@@ -125,7 +138,7 @@ class SimulacaoController {
             /**
              * Imprime os dados nos respectivos inputs, formatando como valor moeda BRL (R$).
              */
-            this._inputPssRetido.value = this._simulacao.pssRetido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+            //this._inputPssRetido.value = this._simulacao.pssRetido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
             this._inputBaseDeCalculo.value = this._simulacao.baseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
             this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
 
@@ -192,7 +205,9 @@ class SimulacaoController {
 
             let valorRecebido = this._inputValorRecebido.value.replace('.', '').replace(',', '.');
 
-            return new Simulacao(anoInformado, parseFloat(valorRecebido), parseInt(this._inputNumeroDeMeses.value));
+            let pssRetido = this._inputPssRetido.value.replace('.', '').replace(',', '.');
+
+            return new Simulacao(anoInformado, parseFloat(valorRecebido), parseFloat(pssRetido), parseInt(this._inputNumeroDeMeses.value));
         }
 
 }
