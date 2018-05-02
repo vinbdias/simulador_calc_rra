@@ -289,14 +289,18 @@ class Simulacao {
 
 		let irDevido = 0.00;
 		let irCobrado = 0.00;
+        
+        if((this._primeiroTeto * this._numeroDeMeses) >= this._baseDeCalculo) {
 
-        if((this._primeiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._segundoTeto * this._numeroDeMeses)) {
-
+            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;
+        }
+        else if((this._primeiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._segundoTeto * this._numeroDeMeses)) {     
+                
             irDevido = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - (this._valorADeduzirSegundoPisoSegundoTeto * this._numeroDeMeses);
             irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;
         }
         else if((this._segundoTeto * this._numeroDeMeses) < this._baseDeCalculo) {
-
+            
             irDevido = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - (this._valorADeduzirTerceiroPisoTerceiroTeto * this._numeroDeMeses);
             irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;
         }
@@ -313,7 +317,11 @@ class Simulacao {
         let irDevido = 0.00;
         let irCobrado = 0.00;        
         
-        if((this._primeiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._segundoTeto * this._numeroDeMeses)) {
+        if((this._primeiroTeto * this._numeroDeMeses) >= this._baseDeCalculo) {
+
+            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;
+        }        
+        else if((this._primeiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._segundoTeto * this._numeroDeMeses)) {
             
             irDevido = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - (this._valorADeduzirSegundoPisoSegundoTeto * this._numeroDeMeses);
             irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;
