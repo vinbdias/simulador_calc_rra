@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"exe",
+				"executarSimulacoes"
+			],
+			[
+				"ex",
+				"executarSimulacoes"
+			],
+			[
 				"_in",
 				"_inputAnoRecebimento"
 			],
@@ -218,7 +226,10 @@
 	},
 	"expanded_folders":
 	[
-		"/C/wamp64/www/simulador_calc_rra"
+		"/C/wamp64/www/simulador_calc_rra",
+		"/C/wamp64/www/simulador_calc_rra/js",
+		"/C/wamp64/www/simulador_calc_rra/js/app",
+		"/C/wamp64/www/simulador_calc_rra/js/app/controllers"
 	],
 	"file_history":
 	[
