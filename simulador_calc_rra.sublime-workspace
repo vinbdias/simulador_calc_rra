@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"exe",
+				"executarSimulacoes\t(SimulacaoController.js)"
+			],
+			[
+				"que",
+				"querySelector\t(SimulacaoController.js)"
+			],
+			[
+				"Sim",
+				"SimulacaoController"
+			],
+			[
+				"type",
+				"type=〔attribute〕"
+			],
+			[
 				"parse",
 				"parseFloat"
 			],
@@ -22,10 +38,6 @@
 			[
 				"ir",
 				"irCobrado\t(Simulacao.js)"
-			],
-			[
-				"exe",
-				"executarSimulacoes"
 			],
 			[
 				"ex",
@@ -160,38 +172,79 @@
 	"buffers":
 	[
 		{
-			"file": "js/app/models/Simulacao.js",
+			"contents": "/**\n * Classe auxiliar de formatação numérica.\n */\nexport class NumeroHelper {\n\n\tstatic formataMoeda(valor) {\n\n\t\tlet v = valor;\n\t\tv = v.replace(/\\D/g, \"\"); //permite digitar apenas números\n\t\tv = v.replace(/[0-9]{12}/, \"inválido\"); //limita pra máximo 999.999.999,99\n\t\tv = v.replace(/(\\d{1})(\\d{8})$/, \"$1.$2\"); //coloca ponto antes dos últimos 8 digitos\n\t\tv = v.replace(/(\\d{1})(\\d{5})$/, \"$1.$2\"); //coloca ponto antes dos últimos 5 digitos\n\t\tv = v.replace(/(\\d{1})(\\d{1,2})$/, \"$1,$2\"); //coloca virgula antes dos últimos 2 digitos\n\t\treturn v;\n\t}\n\n}\n",
+			"file": "js/app-es6/helpers/NumeroHelper.js",
+			"file_size": 570,
+			"file_write_time": 131701713710744637,
 			"settings":
 			{
-				"buffer_size": 10499,
-				"encoding": "UTF-8",
+				"buffer_size": 552,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "js/app/datasource/DataSource.js",
+			"contents": "import {DataSource} from '../datasource/DataSource';\n\n/**\n * Classe responsável pelos dados e regras de negócio de uma simulação.\n */\nexport class Simulacao {\n\n    /**\n     * Método construtor\n     * @param int anoRecebimento => ano de recebimento.\n     * @param float valorRecebido => valor recebido.\n     * @param float pssRetido => pss retido.\n     * @param numeroDeMeses => número de meses.\n     */\n\tconstructor(anoRecebimento, valorRecebido, pssRetido, numeroDeMeses) {\n\n        /**\n         * Define os atributos da simulação a partir dos 3 parâmetros informados: anoRecebimento, valorRecebido e numeroDeMeses.\n         */\n\t\tthis._anoRecebimento = anoRecebimento;\n\t\tthis._valorRecebido = valorRecebido;\n        this._pssRetido = pssRetido;\n\t\tthis._numeroDeMeses = numeroDeMeses;\n\n\t\tthis._setDataSource();\n\n        this._setAliquotas();\n\n        this._setTetos();\n\n        this._setValoresADeduzir();\n\n        this._setBaseDeCalculo();\n\n        this._setTaxaSelic();\n\n        this._setIrCobradoDevido();\n\n        this._setNovaBaseDeCalculo();\n\n        this._setIrARestituir();\n\n        this._setIrARestituirAtualizado();\n\n\n\t\tObject.freeze(this);\n\t}\n\n\n    /**\n     * Método que define o datasource, a fonte de dados, com a qual a simulação vai trabalhar para definir e calcular seus valores.\n     */\n    _setDataSource() {\n\n        this._dataSource = new DataSource().data;\n    }\n\n    /**\n     * Método que define, na simulação instanciada, a base de cálculo, o atributo baseDeCalculo.\n     */\n    _setBaseDeCalculo() {\n\n        //this._pssRetido = this._valorRecebido * 0.11;\n        this._baseDeCalculo = this._valorRecebido - this._pssRetido;\n    }\n\n    /**\n     * Método que define, na simulação instanciada, a taxa selic, o atributo taxaSelic.\n     */\n    _setTaxaSelic() {\n\n       this._taxaSelic = this._dataSource[this._anoRecebimento].taxaSelic;\n    }\n\n    /**\n     * Método que define as alíquotas, a partir do datasource, a serem utilizadas em cálculos da simulação.\n     */\n    _setAliquotas() {\n\n        /**\n         * Até para o ano 2009, temos um domínio de alíquotas. Após 2009, outro.\n         */\n        if(this._anoRecebimento < 2009) {\n\n            this._aliquotaSegundoPisoSegundoTeto = this._dataSource.aliquotas.ate2009.aliquotaSegundoPisoSegundoTeto;\n            this._aliquotaTerceiroPisoTerceiroTeto = this._dataSource.aliquotas.ate2009.aliquotaTerceiroPisoTerceiroTeto;\n        }\n        else {\n\n            this._aliquotaSegundoPisoSegundoTeto = this._dataSource.aliquotas.aPartirDe2009.aliquotaSegundoPisoSegundoTeto;\n            this._aliquotaTerceiroPisoTerceiroTeto = this._dataSource.aliquotas.aPartirDe2009.aliquotaTerceiroPisoTerceiroTeto;\n            this._aliquotaQuartoPisoQuartoTeto = this._dataSource.aliquotas.aPartirDe2009.aliquotaQuartoPisoQuartoTeto;\n            this._aliquotaQuintoPiso = this._dataSource.aliquotas.aPartirDe2009.aliquotaQuintoPiso;\n        }\n    }\n\n    /**\n     * Método que define os tetos, a partir do datasource, a serem utilizados em cálculos da simulação.\n     */\n    _setTetos() {\n\n        this._primeiroTeto = this._dataSource[this._anoRecebimento].primeiroTeto;\n        this._segundoTeto = this._dataSource[this._anoRecebimento].segundoTeto;\n\n        /**\n         * Do ano de 2009 para frente, há mais duas faixas, mais dois tetos.\n         */\n        if(this._anoRecebimento >= 2009) {\n\n            this._quartoTeto = this._dataSource[this._anoRecebimento].quartoTeto;\n            this._terceiroTeto = this._dataSource[this._anoRecebimento].terceiroTeto;\n        }\n    }\n\n    /**\n     * Método que define os valores a deduzir, a partir do datasource, de cada faixa.\n     */\n    _setValoresADeduzir () {\n\n        this._valorADeduzirSegundoPisoSegundoTeto = this._dataSource[this._anoRecebimento].valorADeduzirSegundoPisoSegundoTeto;\n        this._valorADeduzirTerceiroPisoTerceiroTeto = this._dataSource[this._anoRecebimento].valorADeduzirTerceiroPisoTerceiroTeto;\n\n        /**\n         * De 2009 para frente, há mais duas faixas, mais dois valores a deduzir.\n         */\n        if(this._anoRecebimento >= 2009) {\n\n            this._valorADeduzirQuartoPisoQuartoTeto = this._dataSource[this._anoRecebimento].valorADeduzirQuartoPisoQuartoTeto;\n            this._valorADeduzirQuintoPiso = this._dataSource[this._anoRecebimento].valorADeduzirQuintoPiso;\n        }\n    }\n\n    /**\n     * Método que calcula o IR cobrado e devido.\n     */\n    _setIrCobradoDevido() {\n\n        /**\n         * Até 2009 é um cálculo. A partir de 2009, outro.\n         */\n        if(this._anoRecebimento < 2009) {\n\n            this._calculoAte2009();\n        }\n        else {\n\n            this._calculoAPartirDe2009();\n        }\n    }\n\n    /**\n     * Método que define a nova base de cálculo da simulação.\n     */\n    _setNovaBaseDeCalculo() {\n\n        this._novaBaseDeCalculo = this._baseDeCalculo / this._numeroDeMeses;\n    }\n\n    /**\n     * Método que define o IR a ser restituido.\n     */\n    _setIrARestituir() {\n\n        this._irARestituir = this._irCobrado - this._irDevido;\n    }\n\n    /**\n     * Método que define o IR a reduzir atualizado.\n     */\n    _setIrARestituirAtualizado() {\n\n        this._irARestituirAtualizado = this._irARestituir + (this._irARestituir * this._taxaSelic);\n    }\n\n    /**\n     * Getters. Métodos pelos quais acessaremos no controlador, os atributos de uma simulação.\n     */\n    get anoRecebimento() {\n\n        return this._anoRecebimento;\n    }\n\n    get valorRecebido() {\n\n        return this._valorRecebido;\n    }\n\n    get numeroDeMeses() {\n\n        return this._numeroDeMeses;\n    }\n\n    get primeiroTeto() {\n\n        return this._primeiroTeto;\n    }\n\n    get segundoTeto() {\n\n        return this._segundoTeto;\n    }\n\n    get terceiroTeto() {\n\n        return this._terceiroTeto;\n    }\n\n    get quartoTeto() {\n\n        return this._quartoTeto;\n    }\n\n\tget pssRetido() {\n\n\t\treturn this._pssRetido;\n\t}\n\n\tget baseDeCalculo() {\n\n\t\treturn this._baseDeCalculo;\n\t}\n\n\tget taxaSelic() {\n\n\t\treturn this._taxaSelic;\n\t}\n\n\n\tget valorADeduzirSegundoPisoSegundoTeto() {\n\n\t\treturn this._valorADeduzirSegundoPisoSegundoTeto;\n\t}\n\n\tget valorADeduzirTerceiroPisoTerceiroTeto() {\n\n\t\treturn this._valorADeduzirTerceiroPisoTerceiroTeto;\n\t}\n\n    get valorADeduzirQuartoPisoQuartoTeto() {\n\n        return this._valorADeduzirQuartoPisoQuartoTeto;\n    }\n\n    get aliquotaSegundoPisoSegundoTeto() {\n\n        return this._aliquotaSegundoPisoSegundoTeto;\n    }\n\n    get aliquotaTerceiroPisoTerceiroTeto() {\n\n        return this._aliquotaTerceiroPisoTerceiroTeto;\n    }\n\n    get aliquotaQuartoPisoQuartoTeto() {\n\n        return this._aliquotaQuartoPisoQuartoTeto;\n    }\n\n    get aliquotaQuintoPiso() {\n\n        return this._aliquotaQuintoPiso;\n    }\n\n    get irDevido() {\n\n        return this._irDevido;\n    }\n\n    get irCobrado() {\n\n        return this._irCobrado;\n    }\n\n    get novaBaseDeCalculo() {\n\n        return this._novaBaseDeCalculo;\n    }\n\n    get irARestituir() {\n\n        return this._irARestituir;\n    }\n\n    get irARestituirAtualizado() {\n\n        return this._irARestituirAtualizado;\n    }\n\n    /**\n     * Método que executa os cálculos de IR cobrado e devido de uma simulação até o ano de 2009.\n     */\n\t_calculoAte2009()  {\n\n\t\tlet irDevido = 0.00;\n\t\tlet irCobrado = 0.00;\n        \n        if((this._primeiroTeto * this._numeroDeMeses) >= this._baseDeCalculo) {\n\n            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;\n        }\n        else if((this._primeiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._segundoTeto * this._numeroDeMeses)) {     \n                \n            irDevido = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - (this._valorADeduzirSegundoPisoSegundoTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;\n        }\n        else if((this._segundoTeto * this._numeroDeMeses) < this._baseDeCalculo) {\n            \n            irDevido = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - (this._valorADeduzirTerceiroPisoTerceiroTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - this._valorADeduzirTerceiroPisoTerceiroTeto;\n        }\n\n        this._irDevido = irDevido;\n        this._irCobrado = irCobrado;\n\t}\n\n    /**\n     * Método que executa os cálculos de IR cobrado e devido de uma simulação a partir de 2009.\n     */\n    _calculoAPartirDe2009() {\n\n        let irDevido = 0.00;\n        let irCobrado = 0.00;        \n        \n        if((this._primeiroTeto * this._numeroDeMeses) >= this._baseDeCalculo) {\n\n            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;\n        }        \n        else if((this._primeiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._segundoTeto * this._numeroDeMeses)) {\n            \n            irDevido = (this._baseDeCalculo * this._aliquotaSegundoPisoSegundoTeto) - (this._valorADeduzirSegundoPisoSegundoTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;\n        }\n        else if((this._segundoTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._terceiroTeto * this._numeroDeMeses)) {\n            \n            irDevido = (this._baseDeCalculo * this._aliquotaTerceiroPisoTerceiroTeto) - (this._valorADeduzirTerceiroPisoTerceiroTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;\n        }\n        else if((this._terceiroTeto * this._numeroDeMeses) < this._baseDeCalculo && this._baseDeCalculo <= (this._quartoTeto * this._numeroDeMeses)) {\n            \n            irDevido = (this._baseDeCalculo * this._aliquotaQuartoPisoQuartoTeto) - (this._valorADeduzirQuartoPisoQuartoTeto * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;\n        }\n        else if((this._quartoTeto * this._numeroDeMeses) < this._baseDeCalculo) {\n\n            irDevido = (this._baseDeCalculo * this._aliquotaQuintoPiso) - (this._valorADeduzirQuintoPiso * this._numeroDeMeses);\n            irCobrado = (this._baseDeCalculo * this._aliquotaQuintoPiso) - this._valorADeduzirQuintoPiso;\n        }\n\n        this._irDevido = irDevido;\n        this._irCobrado = irCobrado;\n    }\n\n}\n",
+			"file": "js/app-es6/models/Simulacao.js",
+			"file_size": 10907,
+			"file_write_time": 131701713710900505,
 			"settings":
 			{
-				"buffer_size": 3527,
-				"encoding": "UTF-8",
+				"buffer_size": 10560,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "js/app/controllers/SimulacaoController.js",
+			"contents": "import {NumeroHelper} from '../helpers/NumeroHelper';\nimport {Simulacao} from '../models/Simulacao';\n\n/**\n * Classe do controlador da simulação. Responsável por \"amarrar\" todas as interações da tela.\n */\nclass SimulacaoController {\n\n        /**\n         * Método construtor\n         */\n        constructor() {\n            /**\n             * Cria um apelido para seletor do DOM. Como o $ do jQuery.\n             */\n            let $ = document.querySelector.bind(document);\n\n            /**\n             * Captura os inputs da tela para futuros controles.\n             */\n            this._inputAnoRecebimento = $('#anoRecebimento');\n            this._inputValorRecebido = $('#valorRecebido');\n            this._inputNumeroDeMeses = $('#numeroDeMeses');\n\n            this._inputPssRetido = $('#pssRetido');\n            this._inputBaseDeCalculo = $('#baseDeCalculo');\n\n            this._inputIrDevido = $('#irDevido');\n            this._inputIrCobrado = $('#irCobrado');\n\n            this._inputNovaBaseDeCalculo = $('#novaBaseDeCalculo');\n\n            this._inputIrARestituir = $('#irARestituir');\n            this._inputIrARestituirAtualizado = $('#irARestituirAtualizado');\n        }\n\n        /**\n         * Método que formata o valor do campo '#valorRecebido', mediante um evento da página.\n         * @param Event event => evento que acionou a formatação do valor do campo '#valorRecebido'.\n         */\n        formataValorRecebido(event) {\n\n            event.preventDefault();\n\n            this._inputValorRecebido.value = NumeroHelper.formataMoeda(this._inputValorRecebido.value);\n        }\n\n        /**\n         * Método que formata o valor do campo '#pssRetido', mediante um evento da página.\n         * @param Event event => evento que acionou a formatação do valor do campo '#pssRetido'.\n         */\n        formataPssRetido(event) {\n\n            event.preventDefault();\n\n            this._inputPssRetido.value = NumeroHelper.formataMoeda(this._inputPssRetido.value);\n        }\n\n        /**\n         * Método que executa as simulações da página.\n         * @param Event event => evento que acionou a execução das simulações.\n         */\n        executarSimulacoes(event) {            \n\n            /**\n             * Evita a execução padrão do evento para que se tenha total controle da execução.\n             */\n            event.preventDefault();\n\n            //if(!this._validarDadosDeEntrada()) return false;\n\n            /**\n             * Chama os métodos de exeução das simulações do ano informado e dos outros.\n             */\n            this._executarSimulacaoAnoInformado();\n            //this._executarSimulacaoDe2005A2011();\n\n        }\n\n        /**\n         * Método que valida os dados de entrada.        \n         */\n        _validarDadosDeEntrada() {\n\n            event.preventDefault();\n\n            let valido = true;\n\n            if(!this._inputAnoRecebimento.value) {\n\n                this._inputAnoRecebimento.placeholder = 'Informe o ano.';\n                this._inputAnoRecebimento.style.borderColor = 'red';\n\n                valido = false;\n            }\n            else {\n\n                this._inputAnoRecebimento.placeholder = '';\n                this._inputAnoRecebimento.style.borderColor = '';\n            }\n\n            if(!this._inputValorRecebido.value) {\n\n                this._inputValorRecebido.placeholder = 'Informe o valor.';\n                this._inputValorRecebido.style.borderColor = 'red';\n\n                valido = false;\n            }\n            else {\n\n                this._inputValorRecebido.placeholder = '';\n                this._inputValorRecebido.style.borderColor = '';                \n            }\n\n            if(!this._inputNumeroDeMeses.value) {\n\n                this._inputNumeroDeMeses.placeholder = 'Informe meses.';\n                this._inputNumeroDeMeses.style.borderColor = 'red';\n\n                valido = false;\n            }\n            else {\n\n                this._inputNumeroDeMeses.placeholder = '';\n                this._inputNumeroDeMeses.style.borderColor = '';                \n            }\n\n            return valido;            \n        }\n\n        /**\n         * Método que executa a simulação do ano informado na tela.\n         */\n        _executarSimulacaoAnoInformado() {\n\n            /**\n             * Cria uma simulação a partir do ano informado no input '#anoRecebimento', já obtendo todos os dados a serem exibidos nos campos vazios da tela.\n             */\n            this._simulacao = this._criarSimulacao(this._inputAnoRecebimento.value);\n\n            /**\n             * Imprime os dados nos respectivos inputs, formatando como valor moeda BRL (R$).\n             */\n            //this._inputPssRetido.value = this._simulacao.pssRetido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputBaseDeCalculo.value = this._simulacao.baseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n\n            this._inputIrDevido.value = this._simulacao.irDevido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputIrCobrado.value = this._simulacao.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n\n            this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputIrARestituir.value = this._simulacao.irARestituir.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n            this._inputIrARestituirAtualizado.value = this._simulacao.irARestituirAtualizado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n\n        }\n\n        /**\n         * Método que executa as simulações restantes, de 2005 a 2009, pulando a do ano informado, pois esta já foi executada pelo método _executarSimulacaoAnoInformado.\n         */\n        _executarSimulacaoDe2005A2011() {\n\n            /**\n             * Cria um apelido para seletor do DOM. Como o $ do jQuery.\n             */\n            let $ = document.querySelector.bind(document);\n\n            /**\n             * Inicializa o loop para os anos restantes.\n             */\n            for(let i = 2005; i <= 2011; i++) {\n\n                /**\n                 * Inicializa a simulação do loop vazia.\n                 */\n                this._simulacaoLoop = null;\n\n                /**\n                 * Verifica se a iteração do laço se refere à simulação já criada.\n                 */\n                if(i == this._inputAnoRecebimento.value) {\n\n                    /**\n                     * Imprime os valores na tabela a partir da simulação já criada.\n                     */\n                    $('#RRADevido' + i).innerHTML = this._simulacao.irDevido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n                    $('#RRACobrado' + i).innerHTML = this._simulacao.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n\n                    continue;\n                }\n                else {\n\n                    /**\n                     * Cria a simulação a partir da iteração do laço, correspondente a um dos anos (2005 a 2009).\n                     */\n                    this._simulacaoLoop = this._criarSimulacao(i);\n\n                    $('#RRADevido' + i).innerHTML = this._simulacaoLoop.irDevido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n                    $('#RRACobrado' + i).innerHTML = this._simulacaoLoop.irCobrado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n                }\n            }\n        }\n\n        /**\n         * Cria simulação a partir de um ano informado.\n         * @param int anoInformado => ano informado. Necessário para parametrização da simulação no modelo.\n         */\n        _criarSimulacao(anoInformado) {\n\n            let valorRecebido = this._inputValorRecebido.value.replace('.', '').replace(',', '.');\n\n            let pssRetido = this._inputPssRetido.value.replace('.', '').replace(',', '.');\n\n            return new Simulacao(anoInformado, parseFloat(valorRecebido), parseFloat(pssRetido), parseInt(this._inputNumeroDeMeses.value));\n        }\n\n}\n",
+			"file": "js/app-es6/controllers/SimulacaoController.js",
+			"file_size": 8529,
+			"file_write_time": 131701713710744637,
 			"settings":
 			{
-				"buffer_size": 8248,
-				"encoding": "UTF-8",
+				"buffer_size": 8282,
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"contents": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\" />\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n    <link rel=\"shortcut icon\" href=\"http://www.iconarchive.com/download/i99341/dtafalonso/android-lollipop/Calculator.ico\" />\n    <title>Simulador de Cálculos RRA</title>\n    <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css\" />\n\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center\">\n            <div class=\"col-md-12\" style=\"margin:30px 0 40px 0;text-align:center\"><h2>SIMULAÇÃO DE CÁLCULOS RRA </h2></div>\n\n            <div class=\"col-md-5\" style=\"margin-bottom:60px;\">\n\n                <form id=\"formSimulador\" onsubmit=\"simulacaoController.executarSimulacoes(event)\">\n\n                    <div class=\"form-group row\">\n                        <label for=\"anoRecebimento\" class=\"col-sm-8 col-form-label\">Ano recebimento:</label>\n                        <select onblur=\"simulacaoController.executarSimulacoes(event)\" name=\"anoRecebimento\" id=\"anoRecebimento\" class=\"col-sm-4 form-control text-right\" required>\n                            <option value=\"2005\">2005</option>\n                            <option value=\"2006\" selected>2006</option>\n                            <option value=\"2007\">2007</option>\n                            <option value=\"2008\">2008</option>\n                            <option value=\"2009\">2009</option>\n                            <option value=\"2010\">2010</option>\n                            <option value=\"2011\">2011</option>                            \n                        </select>                        \n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"valorRecebido\" class=\"col-sm-8 col-form-label\">Valor recebido:</label>\n                        <input type=\"text\" value=\"45.000,00\" class=\"col-sm-4 form-control text-right\" name=\"valorRecebido\" id=\"valorRecebido\" required />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"pssRetido\" class=\"col-sm-8 col-form-label\">PSS retido:</label>\n                        <input value=\"4.950,00\" type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"pssRetido\" id=\"pssRetido\" />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"baseDeCalculo\" class=\"col-sm-8 col-form-label\">Base de cálculo(IR - cobrado):</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"baseDeCalculo\" id=\"baseDeCalculo\" disabled=\"true\" />\n                    </div>\n\n                    <div class=\"form-group row\" style=\"background-color:#e9ecef;font-size:18px!important;font-weight:bold\">\n                        <label for=\"irCobrado\" class=\"col-sm-8 col-form-label\">IR(cobrado)</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"irCobrado\" id=\"irCobrado\" disabled=\"true\" style=\"font-size:18px!important;font-weight:bold!important;\" />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"numeroDeMeses\" class=\"col-sm-8 col-form-label\">Número de meses:</label>\n                        <input type=\"text\" value=\"20\" class=\"col-sm-4 form-control text-right\" name=\"numeroDeMeses\" id=\"numeroDeMeses\" required />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"novaBaseDeCalculo\" class=\"col-sm-8 col-form-label\">Nova base de cálculo (IR - RRA):</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"novaBaseDeCalculo\" id=\"novaBaseDeCalculo\" disabled=\"true\" />\n                    </div>\n\n                    <div class=\"form-group row\">\n                        <label for=\"irDevido\" class=\"col-sm-8 col-form-label\">IR Devido (RRA):</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"irDevido\" id=\"irDevido\" disabled=\"true\" />\n                    </div>\n\n                    <div class=\"form-group row\" style=\"background-color:#e9ecef;font-size:18px!important;font-weight:bold\">\n                        <label for=\"irARestituir\" class=\"col-sm-8 col-form-label\">IR a Restituir:</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"irARestituir\" id=\"irARestituir\" disabled=\"true\" />\n                    </div>\n\n\n                    <div class=\"form-group row\" style=\"background-color:#e9ecef;font-size:18px!important;font-weight:bold\">\n                        <label for=\"irARestituirAtualizado\" class=\"col-sm-8 col-form-label\">IR a restituir (atualizado):</label>\n                        <input type=\"text\" class=\"col-sm-4 form-control text-right\" name=\"irARestituirAtualizado\" id=\"irARestituirAtualizado\" disabled=\"true\" />\n                    </div>\n\n                    <button type=\"submit\" class=\"btn btn-primary\">Simular</button>\n                </form>\n            </div>\n\n<!--             <div class=\"col-md-7\" style=\"margin-bottom:60px;\">\n                <table width=\"100%\" border=\"0\" cellspacing=\"5\" cellpadding=\"5\" class=\"table text-center table-striped table-bordered\">\n                    <thead class=\"thead-dark \">\n                        <tr>\n                            <th scope=\"col\">Ano</th>\n                            <th scope=\"col\">IR - RRA devido</th>\n                            <th scope=\"col\">IR - Cobrado</th>\n                            <th scope=\"col\">Taxa Selic</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr>\n                            <td>2005</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2005\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2005\"></label></td>\n                            <td>127,45%</td>\n                        </tr>\n                        <tr>\n                            <td>2006</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2006\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2006\"></label></td>\n                            <td>114,32%</td>\n                        </tr>\n                        <tr>\n                            <td>2007</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2007\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2007\"></label></td>\n                            <td>103,50%</td>\n                        </tr>\n                        <tr>\n                            <td>2008</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2008\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2008\"></label></td>\n                            <td>91,37%</td>\n                        </tr>\n                        <tr>\n                            <td>2009</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2009\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2009\"></label></td>\n                            <td>82,74%</td>\n                        </tr>\n                        <tr>\n                            <td>2010</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2010\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2010\"></label></td>\n                            <td>72,76%</td>\n                        </tr>\n                        <tr>\n                            <td>2011</td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRADevido2011\"></label></td>\n                            <td><label class=\"col-sm-8 col-form-label\" id=\"RRACobrado2011\"></label></td>\n                            <td>61,88%</td>\n                        </tr>\n                        <tr bgcolor=\"#212529\">\n                            <td>&nbsp;</td>\n                            <td>&nbsp;</td>\n                            <td>&nbsp;</td>\n                            <td>&nbsp;</td>\n                        </tr>\n                    </tbody>\n                </table>\n\n\n            </div> -->\n        </div>\n    </div>\n    <script src=\"node_modules/systemjs/dist/system.js\"></script>\n    <script type=\"text/javascript\">\n        \n        System.defaultJSExtensions = true; //permite omitir a extensão .js dos imports\n        System.import('js/app/boot').catch(function(err){\n            console.error(err);\n        });\n    </script>        \n</body>\n</html>",
 			"file": "index.html",
+			"file_size": 9667,
+			"file_write_time": 131701713710744637,
 			"settings":
 			{
-				"buffer_size": 9494,
-				"encoding": "UTF-8 with BOM",
+				"buffer_size": 9035,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "import {SimulacaoController} from './controllers/SimulacaoController';\n\nlet simulacaoController = new SimulacaoController();\n\ndocument.querySelector('#formSimulador').onsubmit = simulacaoController.executarSimulacoes.bind(simulacaoController);\ndocument.querySelector('#valorRecebido').onblur = simulacaoController.executarSimulacoes.bind(simulacaoController);\ndocument.querySelector('#numeroDeMeses').onblur = simulacaoController.formataPssRetido.bind(simulacaoController);\n\ndocument.querySelector('#valorRecebido').onkeyup = simulacaoController.formataValorRecebido.bind(simulacaoController);\ndocument.querySelector('#pssRetido').onkeyup = simulacaoController.formataPssRetido.bind(simulacaoController);\n\n",
+			"file": "js/app-es6/boot.js",
+			"file_size": 717,
+			"file_write_time": 131701681083630547,
+			"settings":
+			{
+				"buffer_size": 706,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "'use strict';\n\nSystem.register(['../helpers/NumeroHelper', '../models/Simulacao'], function (_export, _context) {\n            \"use strict\";\n\n            var NumeroHelper, Simulacao, _createClass, SimulacaoController;\n\n            function _classCallCheck(instance, Constructor) {\n                        if (!(instance instanceof Constructor)) {\n                                    throw new TypeError(\"Cannot call a class as a function\");\n                        }\n            }\n\n            return {\n                        setters: [function (_helpersNumeroHelper) {\n                                    NumeroHelper = _helpersNumeroHelper.NumeroHelper;\n                        }, function (_modelsSimulacao) {\n                                    Simulacao = _modelsSimulacao.Simulacao;\n                        }],\n                        execute: function () {\n                                    _createClass = function () {\n                                                function defineProperties(target, props) {\n                                                            for (var i = 0; i < props.length; i++) {\n                                                                        var descriptor = props[i];\n                                                                        descriptor.enumerable = descriptor.enumerable || false;\n                                                                        descriptor.configurable = true;\n                                                                        if (\"value\" in descriptor) descriptor.writable = true;\n                                                                        Object.defineProperty(target, descriptor.key, descriptor);\n                                                            }\n                                                }\n\n                                                return function (Constructor, protoProps, staticProps) {\n                                                            if (protoProps) defineProperties(Constructor.prototype, protoProps);\n                                                            if (staticProps) defineProperties(Constructor, staticProps);\n                                                            return Constructor;\n                                                };\n                                    }();\n\n                                    SimulacaoController = function () {\n\n                                                /**\n                                                 * Método construtor\n                                                 */\n                                                function SimulacaoController() {\n                                                            _classCallCheck(this, SimulacaoController);\n\n                                                            /**\n                                                             * Cria um apelido para seletor do DOM. Como o $ do jQuery.\n                                                             */\n                                                            var $ = document.querySelector.bind(document);\n\n                                                            /**\n                                                             * Captura os inputs da tela para futuros controles.\n                                                             */\n                                                            this._inputAnoRecebimento = $('#anoRecebimento');\n                                                            this._inputValorRecebido = $('#valorRecebido');\n                                                            this._inputNumeroDeMeses = $('#numeroDeMeses');\n\n                                                            this._inputPssRetido = $('#pssRetido');\n                                                            this._inputBaseDeCalculo = $('#baseDeCalculo');\n\n                                                            this._inputIrDevido = $('#irDevido');\n                                                            this._inputIrCobrado = $('#irCobrado');\n\n                                                            this._inputNovaBaseDeCalculo = $('#novaBaseDeCalculo');\n\n                                                            this._inputIrARestituir = $('#irARestituir');\n                                                            this._inputIrARestituirAtualizado = $('#irARestituirAtualizado');\n                                                }\n\n                                                /**\n                                                 * Método que formata o valor do campo '#valorRecebido', mediante um evento da página.\n                                                 * @param Event event => evento que acionou a formatação do valor do campo '#valorRecebido'.\n                                                 */\n\n\n                                                _createClass(SimulacaoController, [{\n                                                            key: 'formataValorRecebido',\n                                                            value: function formataValorRecebido(event) {\n\n                                                                        event.preventDefault();\n\n                                                                        this._inputValorRecebido.value = NumeroHelper.formataMoeda(this._inputValorRecebido.value);\n                                                            }\n                                                }, {\n                                                            key: 'formataPssRetido',\n                                                            value: function formataPssRetido(event) {\n\n                                                                        event.preventDefault();\n\n                                                                        this._inputPssRetido.value = NumeroHelper.formataMoeda(this._inputPssRetido.value);\n                                                            }\n                                                }, {\n                                                            key: 'executarSimulacoes',\n                                                            value: function executarSimulacoes(event) {\n\n                                                                        /**\n                                                                         * Evita a execução padrão do evento para que se tenha total controle da execução.\n                                                                         */\n                                                                        event.preventDefault();\n\n                                                                        //if(!this._validarDadosDeEntrada()) return false;\n\n                                                                        /**\n                                                                         * Chama os métodos de exeução das simulações do ano informado e dos outros.\n                                                                         */\n                                                                        this._executarSimulacaoAnoInformado();\n                                                                        //this._executarSimulacaoDe2005A2011();\n                                                            }\n                                                }, {\n                                                            key: '_validarDadosDeEntrada',\n                                                            value: function _validarDadosDeEntrada() {\n\n                                                                        event.preventDefault();\n\n                                                                        var valido = true;\n\n                                                                        if (!this._inputAnoRecebimento.value) {\n\n                                                                                    this._inputAnoRecebimento.placeholder = 'Informe o ano.';\n                                                                                    this._inputAnoRecebimento.style.borderColor = 'red';\n\n                                                                                    valido = false;\n                                                                        } else {\n\n                                                                                    this._inputAnoRecebimento.placeholder = '';\n                                                                                    this._inputAnoRecebimento.style.borderColor = '';\n                                                                        }\n\n                                                                        if (!this._inputValorRecebido.value) {\n\n                                                                                    this._inputValorRecebido.placeholder = 'Informe o valor.';\n                                                                                    this._inputValorRecebido.style.borderColor = 'red';\n\n                                                                                    valido = false;\n                                                                        } else {\n\n                                                                                    this._inputValorRecebido.placeholder = '';\n                                                                                    this._inputValorRecebido.style.borderColor = '';\n                                                                        }\n\n                                                                        if (!this._inputNumeroDeMeses.value) {\n\n                                                                                    this._inputNumeroDeMeses.placeholder = 'Informe meses.';\n                                                                                    this._inputNumeroDeMeses.style.borderColor = 'red';\n\n                                                                                    valido = false;\n                                                                        } else {\n\n                                                                                    this._inputNumeroDeMeses.placeholder = '';\n                                                                                    this._inputNumeroDeMeses.style.borderColor = '';\n                                                                        }\n\n                                                                        return valido;\n                                                            }\n                                                }, {\n                                                            key: '_executarSimulacaoAnoInformado',\n                                                            value: function _executarSimulacaoAnoInformado() {\n\n                                                                        /**\n                                                                         * Cria uma simulação a partir do ano informado no input '#anoRecebimento', já obtendo todos os dados a serem exibidos nos campos vazios da tela.\n                                                                         */\n                                                                        this._simulacao = this._criarSimulacao(this._inputAnoRecebimento.value);\n\n                                                                        /**\n                                                                         * Imprime os dados nos respectivos inputs, formatando como valor moeda BRL (R$).\n                                                                         */\n                                                                        //this._inputPssRetido.value = this._simulacao.pssRetido.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});\n                                                                        this._inputBaseDeCalculo.value = this._simulacao.baseDeCalculo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n                                                                        this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n\n                                                                        this._inputIrDevido.value = this._simulacao.irDevido.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n                                                                        this._inputIrCobrado.value = this._simulacao.irCobrado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n\n                                                                        this._inputNovaBaseDeCalculo.value = this._simulacao.novaBaseDeCalculo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n                                                                        this._inputIrARestituir.value = this._simulacao.irARestituir.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n                                                                        this._inputIrARestituirAtualizado.value = this._simulacao.irARestituirAtualizado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n                                                            }\n                                                }, {\n                                                            key: '_executarSimulacaoDe2005A2011',\n                                                            value: function _executarSimulacaoDe2005A2011() {\n\n                                                                        /**\n                                                                         * Cria um apelido para seletor do DOM. Como o $ do jQuery.\n                                                                         */\n                                                                        var $ = document.querySelector.bind(document);\n\n                                                                        /**\n                                                                         * Inicializa o loop para os anos restantes.\n                                                                         */\n                                                                        for (var i = 2005; i <= 2011; i++) {\n\n                                                                                    /**\n                                                                                     * Inicializa a simulação do loop vazia.\n                                                                                     */\n                                                                                    this._simulacaoLoop = null;\n\n                                                                                    /**\n                                                                                     * Verifica se a iteração do laço se refere à simulação já criada.\n                                                                                     */\n                                                                                    if (i == this._inputAnoRecebimento.value) {\n\n                                                                                                /**\n                                                                                                 * Imprime os valores na tabela a partir da simulação já criada.\n                                                                                                 */\n                                                                                                $('#RRADevido' + i).innerHTML = this._simulacao.irDevido.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n                                                                                                $('#RRACobrado' + i).innerHTML = this._simulacao.irCobrado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n\n                                                                                                continue;\n                                                                                    } else {\n\n                                                                                                /**\n                                                                                                 * Cria a simulação a partir da iteração do laço, correspondente a um dos anos (2005 a 2009).\n                                                                                                 */\n                                                                                                this._simulacaoLoop = this._criarSimulacao(i);\n\n                                                                                                $('#RRADevido' + i).innerHTML = this._simulacaoLoop.irDevido.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n                                                                                                $('#RRACobrado' + i).innerHTML = this._simulacaoLoop.irCobrado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n                                                                                    }\n                                                                        }\n                                                            }\n                                                }, {\n                                                            key: '_criarSimulacao',\n                                                            value: function _criarSimulacao(anoInformado) {\n\n                                                                        var valorRecebido = this._inputValorRecebido.value.replace('.', '').replace(',', '.');\n\n                                                                        var pssRetido = this._inputPssRetido.value.replace('.', '').replace(',', '.');\n\n                                                                        return new Simulacao(anoInformado, parseFloat(valorRecebido), parseFloat(pssRetido), parseInt(this._inputNumeroDeMeses.value));\n                                                            }\n                                                }]);\n\n                                                return SimulacaoController;\n                                    }();\n                        }\n            };\n});\n//# sourceMappingURL=SimulacaoController.js.map",
+			"file": "js/app/controllers/SimulacaoController.js",
+			"file_size": 13349,
+			"file_write_time": 131701713710900505,
+			"settings":
+			{
+				"buffer_size": 18686,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "{\t\n\t\"presets\": [\"es2015\"],\n\t\"plugins\": [\"transform-es2015-modules-systemjs\"]\n}",
+			"file": ".babelrc",
+			"file_size": 29,
+			"file_write_time": 131701713710744637,
+			"settings":
+			{
+				"buffer_size": 78,
 				"line_ending": "Windows"
 			}
 		}
@@ -278,15 +331,22 @@
 	},
 	"expanded_folders":
 	[
-		"/C/wamp64/www/simulador_calc_rra",
-		"/C/wamp64/www/simulador_calc_rra/js",
-		"/C/wamp64/www/simulador_calc_rra/js/app",
-		"/C/wamp64/www/simulador_calc_rra/js/app/controllers",
-		"/C/wamp64/www/simulador_calc_rra/js/app/datasource",
-		"/C/wamp64/www/simulador_calc_rra/js/app/models"
+		"/C/simulador_calc_rra"
 	],
 	"file_history":
 	[
+		"/C/alura/js_avancado_III/aluraframe/client/js/app-es6/boot.js",
+		"/C/alura/js_avancado_III/aluraframe/client/index.html",
+		"/C/simulador_calc_rra/js/app-es6/datasource/DataSource.js",
+		"/C/alura/js_avancado_III/aluraframe/client/js/app-es6/controllers/NegociacaoController.js",
+		"/C/simulador_calc_rra/package.json",
+		"/C/simulador_calc_rra/js/app-es6/helpers/NumeroHelper.js",
+		"/C/simulador_calc_rra/index.html",
+		"/C/simulador_calc_rra/js/app-es6/controllers/SimulacaoController.js",
+		"/C/simulador_calc_rra/js/app/controllers/SimulacaoController.js",
+		"/C/simulador_calc_rra/js/app/datasource/DataSource.js",
+		"/C/simulador_calc_rra/js/app/models/Simulacao.js",
+		"/C/simulador_calc_rra/js/app/datasource/DataSource.js.map",
 		"/C/wamp64/www/simulador_calc_rra/js/app/controllers/SimulacaoController.js",
 		"/C/wamp64/www/simulador_calc_rra/index.html",
 		"/C/wamp64/www/simulador_calc_rra/js/app/models/Simulacao.js",
@@ -350,7 +410,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -364,6 +424,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"new ",
+			"new",
 			"5898,15",
 			"                    \n",
 			");            \t           ",
@@ -386,74 +448,96 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "js/app/models/Simulacao.js",
+					"file": "js/app-es6/helpers/NumeroHelper.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10499,
+						"buffer_size": 552,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								808,
-								808
+								58,
+								58
 							]
 						],
 						"settings":
 						{
-							"SL.57.region_keys":
+							"SL.13.region_keys":
 							[
-								"SL.jshint.Highlights.|6491c250b49768da88c4d8c18b294ab5d8d0d98cd657f13cbb1a96261bf953bb|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|84c12022cfe8c83b13974ee609e7cad0e99fcbe1910c95f413647e433b9b6605|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|f378b519e2e6d1b12d7a386af3f31abca1ec27b38bfa54638c89be52fd831d49|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|3ac72345437a7fbfbb37225d53fc39152263856bfe9d884d9916d89b9c4df416|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|a60e62f088e8fe3806328deef7a804c46a3171a3df48ffa85178f76970c75e7c|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|6a82a807b9d862f8e1afe8670ef09755b61760ac953475d41a8dd6b2298338a6|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|78959aefe9dc31f51a1a5dda5d55a37ec5fb1775e4524a77b5890583dc83d5ba|source.js meta.function-call.method.js support.function.dom.js|1316",
 								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|3398024c9977f81fcb2920979c759dc12be84fb3d97e99d7046487dca6c4ad32|source.js meta.function-call.method.js support.function.dom.js|1316",
 								"sublime_linter.protected_regions"
 							],
+							"SL.23.region_keys":
+							[
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|78959aefe9dc31f51a1a5dda5d55a37ec5fb1775e4524a77b5890583dc83d5ba|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|6a82a807b9d862f8e1afe8670ef09755b61760ac953475d41a8dd6b2298338a6|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|3398024c9977f81fcb2920979c759dc12be84fb3d97e99d7046487dca6c4ad32|source.js meta.function-call.method.js support.function.dom.js|1316"
+							],
 							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 270.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "js/app/datasource/DataSource.js",
+					"file": "js/app-es6/models/Simulacao.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3527,
+						"buffer_size": 10560,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1204,
-								1204
+								785,
+								784
 							]
 						],
 						"settings":
 						{
-							"SL.59.region_keys":
+							"SL.14.region_keys":
 							[
-								"SL.jshint.Highlights.|eeb201ff6811aebd54fcbf6ab2ee004ed3efa1432fca2d8e8fb1afd06d8b5504|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|be80b6a7e455dfdd46c0183f38e9b5171d4594fd786f3f3649e3bdc3e7cf743d|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|0645952d5aea48e303d022aa63cf67b4e1cb9a7cb3700ae0c38b8e95de220f15|source.js meta.function-call.method.js support.function.dom.js|1316",
 								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"sublime_linter.protected_regions"
+								"SL.jshint.Highlights.|28ba6473213c657149463342ee34b89db9ece034b3b83c4c0b25c6bc61aac4ec|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|31ce0bb69268e19ac62f14f3a94963c0d5e231722a0e32e628c089d1bad5390c|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|e10270ccd6a50c9ac37c8b7380802bfbac0acad091c9cf48695dbdc7898ebe27|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|0d9b79b2452763cc85a06130c33abf3a1dbdcfcb1f89f473660c58ca6ed77423|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|3d0f3ffba100da34b950b4e6c6062c9697266a10cc1e467560afb1f879134ddc|source.js meta.function-call.method.js support.function.dom.js|1316"
+							],
+							"SL.27.region_keys":
+							[
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|0d9b79b2452763cc85a06130c33abf3a1dbdcfcb1f89f473660c58ca6ed77423|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|be80b6a7e455dfdd46c0183f38e9b5171d4594fd786f3f3649e3bdc3e7cf743d|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|28ba6473213c657149463342ee34b89db9ece034b3b83c4c0b25c6bc61aac4ec|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|31ce0bb69268e19ac62f14f3a94963c0d5e231722a0e32e628c089d1bad5390c|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|0645952d5aea48e303d022aa63cf67b4e1cb9a7cb3700ae0c38b8e95de220f15|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|3d0f3ffba100da34b950b4e6c6062c9697266a10cc1e467560afb1f879134ddc|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|e10270ccd6a50c9ac37c8b7380802bfbac0acad091c9cf48695dbdc7898ebe27|source.js meta.function-call.method.js support.function.dom.js|1316"
 							],
 							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
@@ -464,39 +548,55 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "js/app/controllers/SimulacaoController.js",
+					"file": "js/app-es6/controllers/SimulacaoController.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8248,
+						"buffer_size": 8282,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8191,
-								8191
+								100,
+								100
 							]
 						],
 						"settings":
 						{
-							"SL.58.region_keys":
+							"SL.15.region_keys":
 							[
-								"SL.jshint.Highlights.|84c12022cfe8c83b13974ee609e7cad0e99fcbe1910c95f413647e433b9b6605|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|398eb5317bd03a06a8dbbec519d75eb0006ef95213f49ca283a1e204f0dad282|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|2f4f9ee9be34677b9996470a7d912fd2917ec0aca36e7bee751a5bff07b544fc|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|d452f5198f0cbfd6f3ca840c4a995cbe5c9d4b241bbbfd0d6505ce0a7b7e57f7|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|82649e67c2bbfaa9a24d71e6511d9677ab5b2fa280f013912fff0ebdfb284f88|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|18fc77337fa4bf8b6d22984059f4bb9b7625928757096b159ff0015600e115ec|source.js meta.function-call.method.js support.function.dom.js|1316",
-								"SL.jshint.Highlights.|b1f98d54ba5bc387c4c55e4332e587603921ecf45b166f1943fe6a485bd127d1|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|be80b6a7e455dfdd46c0183f38e9b5171d4594fd786f3f3649e3bdc3e7cf743d|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|74185172a1a129f272e18285efb827ddce9afd981a4d21c04a5900ea94cfe1f6|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|ec5ea0b8174480b34fec39089dd0f15f8d990208551841e29a0f35913e6cbe39|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|f456a605e07c4305f34f14ff95281cfdb6ca2371555cc3e0507a088b93ded8ad|source.js meta.function-call.method.js support.function.dom.js|1316",
 								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"sublime_linter.protected_regions"
+								"SL.jshint.Highlights.|1f18b89ef51412a0c0b265491522caeece3dd03bbc1308bd34d6c15f54659b00|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|139a503c484c10aff0f27e21411e31bbe7a50cbda5890a6e8fe3243ccb8741f3|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|373db462947988821a0cace6b8343a545331f2f907201c14861bd1451584cd48|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|c330596b508ef7ad6823e1bf7fd15648c573c9d434a85a5221c8c2eb6ce72be4|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|1adba757ba43a00aa19cfacbfffd619b4ca50c60d86ba367729639a08599ca2a|source.js meta.function-call.method.js support.function.dom.js|1316"
+							],
+							"SL.28.region_keys":
+							[
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|74185172a1a129f272e18285efb827ddce9afd981a4d21c04a5900ea94cfe1f6|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|1adba757ba43a00aa19cfacbfffd619b4ca50c60d86ba367729639a08599ca2a|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|ec5ea0b8174480b34fec39089dd0f15f8d990208551841e29a0f35913e6cbe39|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|373db462947988821a0cace6b8343a545331f2f907201c14861bd1451584cd48|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|139a503c484c10aff0f27e21411e31bbe7a50cbda5890a6e8fe3243ccb8741f3|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|be80b6a7e455dfdd46c0183f38e9b5171d4594fd786f3f3649e3bdc3e7cf743d|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|1f18b89ef51412a0c0b265491522caeece3dd03bbc1308bd34d6c15f54659b00|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|f456a605e07c4305f34f14ff95281cfdb6ca2371555cc3e0507a088b93ded8ad|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|c330596b508ef7ad6823e1bf7fd15648c573c9d434a85a5221c8c2eb6ce72be4|source.js meta.function-call.method.js support.function.dom.js|1316"
 							],
 							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
@@ -504,10 +604,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2565.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -516,23 +616,24 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9494,
+						"buffer_size": 9035,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2524,
-								2524
+								9015,
+								9015
 							]
 						],
 						"settings":
 						{
-							"SL.60.region_keys":
+							"SL.16.region_keys":
 							[
-								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
-								"SL.jshint.Highlights.|e7b6b06f6927f3677e9e6b50e2582b068e54a48c8feb9a1b7a548bcc0b417827|source.js meta.function-call.method.js support.function.dom.js|1316",
+							],
+							"SL.29.region_keys":
+							[
 								"sublime_linter.protected_regions"
 							],
 							"auto_complete": false,
@@ -541,10 +642,146 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 900.0,
+						"translation.y": 162.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/app-es6/boot.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 706,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								107,
+								107
+							]
+						],
+						"settings":
+						{
+							"SL.17.region_keys":
+							[
+								"SL.jshint.Highlights.|be80b6a7e455dfdd46c0183f38e9b5171d4594fd786f3f3649e3bdc3e7cf743d|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|a0340e749b5c74f72e4bb68a0d0256664ea41a587d13cfb34ea61aed085c8863|source.js meta.function-call.method.js support.function.dom.js|1316"
+							],
+							"SL.18.region_keys":
+							[
+								"SL.jshint.Highlights.|be80b6a7e455dfdd46c0183f38e9b5171d4594fd786f3f3649e3bdc3e7cf743d|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|a0340e749b5c74f72e4bb68a0d0256664ea41a587d13cfb34ea61aed085c8863|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png"
+							],
+							"SL.30.region_keys":
+							[
+								"SL.jshint.Highlights.|be80b6a7e455dfdd46c0183f38e9b5171d4594fd786f3f3649e3bdc3e7cf743d|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|a0340e749b5c74f72e4bb68a0d0256664ea41a587d13cfb34ea61aed085c8863|source.js meta.function-call.method.js support.function.dom.js|1316"
+							],
+							"auto_complete": false,
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "js/app/controllers/SimulacaoController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18686,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2390,
+								2390
+							]
+						],
+						"settings":
+						{
+							"SL.18.region_keys":
+							[
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|053f544235deca58105fb63242fde2a324cdf2f03272930bf582afb0825420ad|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|570dae5be8e4e6489d4f12b5ecd0773a73109af75a1da0ddd67f942fa1e59d87|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|242a467b9a9aa594c853f70309bee9c5b4a9eb1cedef1acda4086b54b0c35c34|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|02e15c73717d0cba097001df53ba469ca3ea8053a7b7e9808af76d0d1dbf1e83|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|848cf30f3bf00721b1540576f3c7964a712ed99ffa0abbc1a4a37f66dc41ffb3|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|c2874d40efb57f0e0348ba2664bebb6ff75cfb1e78ca67f50df9dff7b2be2be3|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|f14a531e5230fbf8cbedfe7151a8b1b3d66a954370a73c9b381683d1ccb77f44|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|e574efd6ac6bf7f298d2861a3b59414e0d899249fc4df988b348afd1b3054770|source.js meta.function-call.method.js support.function.dom.js|1316"
+							],
+							"SL.34.region_keys":
+							[
+								"SL.jshint.Gutter.|source.js meta.function-call.method.js support.function.dom.js|Packages/SublimeLinter/gutter-themes/Default/pointer.png",
+								"SL.jshint.Highlights.|242a467b9a9aa594c853f70309bee9c5b4a9eb1cedef1acda4086b54b0c35c34|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|e574efd6ac6bf7f298d2861a3b59414e0d899249fc4df988b348afd1b3054770|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|053f544235deca58105fb63242fde2a324cdf2f03272930bf582afb0825420ad|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|f14a531e5230fbf8cbedfe7151a8b1b3d66a954370a73c9b381683d1ccb77f44|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"sublime_linter.protected_regions",
+								"SL.jshint.Highlights.|02e15c73717d0cba097001df53ba469ca3ea8053a7b7e9808af76d0d1dbf1e83|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|848cf30f3bf00721b1540576f3c7964a712ed99ffa0abbc1a4a37f66dc41ffb3|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|c2874d40efb57f0e0348ba2664bebb6ff75cfb1e78ca67f50df9dff7b2be2be3|source.js meta.function-call.method.js support.function.dom.js|1316",
+								"SL.jshint.Highlights.|570dae5be8e4e6489d4f12b5ecd0773a73109af75a1da0ddd67f942fa1e59d87|source.js meta.function-call.method.js support.function.dom.js|1316"
+							],
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": ".babelrc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 78,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								78,
+								78
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -552,7 +789,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -597,7 +834,7 @@
 	"project": "simulador_calc_rra.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
